@@ -1,4 +1,7 @@
 import Phaser from 'phaser';
+import App from './components/App';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
@@ -15,10 +18,7 @@ const config: Phaser.Types.Core.GameConfig = {
 const game = new Phaser.Game(config);
 
 function preload(this: Phaser.Scene) {
-  this.load.image(
-    'clouds',
-    'assets/clouds.png'
-  );
+  this.load.image('clouds', 'assets/clouds.png');
 }
 
 function create(this: Phaser.Scene) {
@@ -27,3 +27,5 @@ function create(this: Phaser.Scene) {
 }
 
 function update(this: Phaser.Scene) {}
+
+ReactDOM.render(<App />, document.getElementById('root'));

@@ -21,6 +21,7 @@
 		"downlevelIteration": true,
 		// "allowArbitraryExtensions": true,
 		"allowSyntheticDefaultImports": true,
+		"jsx": "react-jsx",
 		"types": [],
 		"baseUrl": "src",
 		"isolatedModules": true,
