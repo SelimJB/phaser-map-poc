@@ -27,8 +27,9 @@
 			}
 		}
 	],
+	"ignorePatterns": ["vite.config.ts"],
 	"rules": {
-		"prettier/prettier": "off"
-	},
-	"ignorePatterns": ["config-overrides.js"]
+		"prettier/prettier": "off",
+		"@typescript-eslint/no-unused-vars": "warn"
+	}
 }
