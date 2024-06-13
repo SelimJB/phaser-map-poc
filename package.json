@@ -1,15 +1,13 @@
 {
-	"name": "phaser-boilerplate",
+	"name": "phaser-vite-boilerplate",
 	"version": "1.0.0",
-	"description": "",
+	"description": "A boilerplate project for Phaser and Vite",
 	"type": "module",
 	"main": "index.js",
 	"scripts": {
 		"start": "vite",
 		"build": "vite build",
-		"serve": "vite preview",
-		"build2": "tsc",
-		"start2": "npm run build && node dist/index.js"
+		"serve": "vite preview"
 	},
 	"devDependencies": {
 		"@testing-library/user-event": "^13.5.0",
