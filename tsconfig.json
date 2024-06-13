@@ -6,7 +6,7 @@
 		"allowJs": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
-		// "noEmit": true,
+		"noEmit": true,
 		"esModuleInterop": true,
 		"strict": true,
 		"alwaysStrict": true,
@@ -19,15 +19,16 @@
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"downlevelIteration": true,
-		// "allowArbitraryExtensions": true,
 		"allowSyntheticDefaultImports": true,
 		"jsx": "react-jsx",
 		"types": [],
-		"baseUrl": "src",
 		"isolatedModules": true,
 		"sourceMap": true,
-		"outDir": "dist",
-		"paths": {}
+		"outDir": "./dist",
+		"baseUrl": "./src",
+		"paths": {
+			"@/*": ["*"]
+		}
 	},
 	"exclude": ["node_modules"],
 	"include": ["src/**/*"]
