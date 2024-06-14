@@ -35,7 +35,7 @@
 	],
 	"compounds": [
 		{
-			"name": "Launch and Debug Vite",
+			"name": "Vite & Chrome",
 			"configurations": ["Launch Vite", "Debug Chrome"]
 		}
 	]

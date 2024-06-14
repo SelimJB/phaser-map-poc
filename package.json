@@ -1,7 +1,7 @@
 {
-	"name": "phaser-vite-boilerplate",
+	"name": "react-phaser-vite-boilerplate",
 	"version": "1.0.0",
-	"description": "A boilerplate project for Phaser and Vite",
+	"description": "A boilerplate project for React, Phaser and Vite",
 	"type": "module",
 	"main": "index.js",
 	"scripts": {

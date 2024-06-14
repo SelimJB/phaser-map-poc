@@ -8,14 +8,14 @@ export default function initializePhaser(): void {
     scene: {
       preload: preload,
       create: create,
-      update: update,
-    },
+      update: update
+    }
   };
 
   const game = new Phaser.Game(config);
 
   function preload(this: Phaser.Scene) {
-    this.load.image('clouds', 'assets/clouds.png');
+    this.load.image('clouds', '/assets/clouds.png');
   }
 
   window.addEventListener('resize', () => {
@@ -27,7 +27,7 @@ export default function initializePhaser(): void {
     this.add
       .text(this.scale.width / 2, this.scale.height / 2 + 100, 'Hello ! (Phaser)', {
         fontSize: '70px',
-        color: '#fff',
+        color: '#fff'
       })
       .setOrigin(0.5);
   }
