@@ -39,7 +39,6 @@ jobs:
             base: '/phaser-map-poc/',
             publicDir: 'public',
             resolve: {
-              extensions: ['.js', '.ts', '.jsx', '.tsx'],
               alias: {
                 '@': '/src',
                 '@phaser': '/src/phaser',
@@ -50,8 +49,7 @@ jobs:
               outDir: 'dist'
             },
             server: {
-              port: 3000,
-              watch: {}
+              port: 3000
             },
             assetsInclude: ['**/*.frag']
           });" > vite.config.ts

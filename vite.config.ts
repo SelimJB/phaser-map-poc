@@ -6,7 +6,6 @@ export default defineConfig({
   publicDir: 'public',
   base: process.env.NODE_ENV === 'production' ? '/phaser-map-poc/' : '/',
   resolve: {
-    extensions: ['.js', '.ts', '.jsx', '.tsx'],
     alias: {
       '@': '/src',
       '@phaser': '/src/phaser',
@@ -17,8 +16,7 @@ export default defineConfig({
     outDir: 'dist'
   },
   server: {
-    port: 3000,
-    watch: {}
+    port: 3000
   },
   assetsInclude: ['**/*.frag']
 });
