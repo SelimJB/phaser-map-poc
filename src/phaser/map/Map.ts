@@ -10,12 +10,13 @@ import { mapViewTextures, sceneParameters } from '../config/config';
 import { calculateGlowingColor } from '../utils/colorUtils';
 import { Point } from './types/geometry';
 import { MapViewTextures } from './types/textures';
+import { uniformEvents, UniformChangeData } from '../services/uniformEvents';
 
 export default class Map {
   private initialized = false;
-  private mapRenderer: MapRenderer;
   private eventManager: EventManager;
   private cameraController: CameraController;
+  private mapRenderer: MapRenderer;
 
   constructor(
     public scene: Phaser.Scene,
@@ -104,7 +105,11 @@ export default class Map {
     this.eventManager.emit('provinceClick', data);
   }
 
-  private initializeEvents() {}
+  private initializeEvents() {
+    uniformEvents.addHandler('uniformChange', (data: UniformChangeData) => {
+      this.mapRenderer.updateUniforms({ [data.uniform]: data.value });
+    });
+  }
 
   update(time: number) {
     if (!this.initialized) return;
