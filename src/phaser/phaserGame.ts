@@ -1,12 +1,14 @@
 import Phaser from 'phaser';
 import { Map, MapViewPipelineType, MapPipelineItem } from './map';
-import { getAssetPath } from './utils/getAssetPath';
 
 export default function initializePhaser(): void {
   const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
     width: window.innerWidth,
     height: window.innerHeight,
+    scale: {
+      autoCenter: Phaser.Scale.CENTER_BOTH
+    },
     parent: 'game-container',
     scene: {
       preload: preload,

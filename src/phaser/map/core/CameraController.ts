@@ -16,13 +16,21 @@ export default class CameraController {
     this.camera.setBounds(-width, -height, width * 2, height * 2);
     this.camera.centerOn(0, 0);
 
-    this.scene.input.on('wheel', (deltaY: number) => {
-      if (deltaY > 0) {
-        this.zoomOut();
-      } else {
-        this.zoomIn();
+    this.scene.input.on(
+      'wheel',
+      (
+        pointer: Phaser.Input.Pointer,
+        gameObjects: Phaser.GameObjects.GameObject[],
+        deltaX: number,
+        deltaY: number
+      ) => {
+        if (deltaY > 0) {
+          this.zoomOut();
+        } else {
+          this.zoomIn();
+        }
       }
-    });
+    );
   }
 
   private zoomIn() {
