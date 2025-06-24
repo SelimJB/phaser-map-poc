@@ -1,3 +1,4 @@
+import { getAssetPath } from '@/phaser/utils/getAssetPath';
 import { EventManager } from '@phaser/services/EventManager';
 import MapShaderPipeline from './MapShaderPipeline';
 import { QuantizationService } from '../core/QuantizationService';
@@ -54,7 +55,8 @@ export default class MapRenderer {
   static loadTexture(scene: Phaser.Scene, textureItem: TextureItem) {
     const { key } = textureItem;
     if (!scene.textures.exists(key)) {
-      if (textureItem.localUrl) scene.load.image(textureItem.key, textureItem.localUrl);
+      if (textureItem.localUrl)
+        scene.load.image(textureItem.key, getAssetPath(textureItem.localUrl));
     }
   }
 

@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { Map, MapViewPipelineType, MapPipelineItem } from './map';
+import { getAssetPath } from './utils/getAssetPath';
 
 export default function initializePhaser(): void {
   const config: Phaser.Types.Core.GameConfig = {
@@ -18,7 +19,7 @@ export default function initializePhaser(): void {
   let mapView: Map;
 
   function preload(this: Phaser.Scene) {
-    this.load.image('clouds', '/assets/clouds.png');
+    this.load.image('clouds', getAssetPath('/assets/clouds.png'));
 
     const shaderItems = [
       {
