@@ -1,0 +1,902 @@
+[
+  {
+    "id": 0,
+    "hash": 0,
+    "shapeInformations": {
+      "center": {
+        "x": 0,
+        "y": 0
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 0,
+          "y": 0
+        },
+        "radius": 0
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 1,
+    "hash": 1,
+    "shapeInformations": {
+      "center": {
+        "x": 565,
+        "y": 994
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 543,
+          "y": 996
+        },
+        "radius": 27
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 2,
+    "hash": 2,
+    "shapeInformations": {
+      "center": {
+        "x": 716,
+        "y": 992
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 741,
+          "y": 990
+        },
+        "radius": 33
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 3,
+    "hash": 3,
+    "shapeInformations": {
+      "center": {
+        "x": 63,
+        "y": 972
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 60,
+          "y": 971
+        },
+        "radius": 52
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 4,
+    "hash": 4,
+    "shapeInformations": {
+      "center": {
+        "x": 385,
+        "y": 977
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 344,
+          "y": 974
+        },
+        "radius": 47
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 5,
+    "hash": 5,
+    "shapeInformations": {
+      "center": {
+        "x": 216,
+        "y": 962
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 237,
+          "y": 971
+        },
+        "radius": 46
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 6,
+    "hash": 6,
+    "shapeInformations": {
+      "center": {
+        "x": 424,
+        "y": 899
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 424,
+          "y": 897
+        },
+        "radius": 56
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 7,
+    "hash": 7,
+    "shapeInformations": {
+      "center": {
+        "x": 286,
+        "y": 834
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 286,
+          "y": 834
+        },
+        "radius": 17
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 8,
+    "hash": 8,
+    "shapeInformations": {
+      "center": {
+        "x": 910,
+        "y": 861
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 900,
+          "y": 884
+        },
+        "radius": 19
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 9,
+    "hash": 9,
+    "shapeInformations": {
+      "center": {
+        "x": 628,
+        "y": 861
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 602,
+          "y": 816
+        },
+        "radius": 55
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 10,
+    "hash": 10,
+    "shapeInformations": {
+      "center": {
+        "x": 522,
+        "y": 855
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 500,
+          "y": 826
+        },
+        "radius": 37
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 11,
+    "hash": 11,
+    "shapeInformations": {
+      "center": {
+        "x": 172,
+        "y": 843
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 157,
+          "y": 849
+        },
+        "radius": 65
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 12,
+    "hash": 12,
+    "shapeInformations": {
+      "center": {
+        "x": 49,
+        "y": 796
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 50,
+          "y": 745
+        },
+        "radius": 49
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 13,
+    "hash": 13,
+    "shapeInformations": {
+      "center": {
+        "x": 722,
+        "y": 823
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 719,
+          "y": 843
+        },
+        "radius": 54
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 14,
+    "hash": 14,
+    "shapeInformations": {
+      "center": {
+        "x": 471,
+        "y": 743
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 418,
+          "y": 764
+        },
+        "radius": 49
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 15,
+    "hash": 15,
+    "shapeInformations": {
+      "center": {
+        "x": 352,
+        "y": 770
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 332,
+          "y": 795
+        },
+        "radius": 28
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 16,
+    "hash": 16,
+    "shapeInformations": {
+      "center": {
+        "x": 262,
+        "y": 717
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 248,
+          "y": 732
+        },
+        "radius": 65
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 17,
+    "hash": 17,
+    "shapeInformations": {
+      "center": {
+        "x": 511,
+        "y": 646
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 489,
+          "y": 651
+        },
+        "radius": 60
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 18,
+    "hash": 18,
+    "shapeInformations": {
+      "center": {
+        "x": 629,
+        "y": 523
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 658,
+          "y": 535
+        },
+        "radius": 41
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 19,
+    "hash": 19,
+    "shapeInformations": {
+      "center": {
+        "x": 533,
+        "y": 531
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 535,
+          "y": 555
+        },
+        "radius": 28
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 20,
+    "hash": 20,
+    "shapeInformations": {
+      "center": {
+        "x": 771,
+        "y": 664
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 762,
+          "y": 614
+        },
+        "radius": 70
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 21,
+    "hash": 21,
+    "shapeInformations": {
+      "center": {
+        "x": 625,
+        "y": 452
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 635,
+          "y": 458
+        },
+        "radius": 25
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 22,
+    "hash": 22,
+    "shapeInformations": {
+      "center": {
+        "x": 282,
+        "y": 588
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 140,
+          "y": 654
+        },
+        "radius": 48
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 23,
+    "hash": 23,
+    "shapeInformations": {
+      "center": {
+        "x": 721,
+        "y": 443
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 721,
+          "y": 443
+        },
+        "radius": 32
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 24,
+    "hash": 24,
+    "shapeInformations": {
+      "center": {
+        "x": 796,
+        "y": 427
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 796,
+          "y": 427
+        },
+        "radius": 30
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 25,
+    "hash": 25,
+    "shapeInformations": {
+      "center": {
+        "x": 331,
+        "y": 439
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 320,
+          "y": 445
+        },
+        "radius": 40
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 26,
+    "hash": 26,
+    "shapeInformations": {
+      "center": {
+        "x": 186,
+        "y": 516
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 186,
+          "y": 516
+        },
+        "radius": 83
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 27,
+    "hash": 27,
+    "shapeInformations": {
+      "center": {
+        "x": 52,
+        "y": 414
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 52,
+          "y": 414
+        },
+        "radius": 50
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 28,
+    "hash": 28,
+    "shapeInformations": {
+      "center": {
+        "x": 622,
+        "y": 364
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 619,
+          "y": 368
+        },
+        "radius": 44
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 29,
+    "hash": 29,
+    "shapeInformations": {
+      "center": {
+        "x": 471,
+        "y": 378
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 486,
+          "y": 354
+        },
+        "radius": 58
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 30,
+    "hash": 30,
+    "shapeInformations": {
+      "center": {
+        "x": 896,
+        "y": 514
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 907,
+          "y": 389
+        },
+        "radius": 70
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 31,
+    "hash": 31,
+    "shapeInformations": {
+      "center": {
+        "x": 962,
+        "y": 715
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 953,
+          "y": 954
+        },
+        "radius": 63
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 32,
+    "hash": 32,
+    "shapeInformations": {
+      "center": {
+        "x": 281,
+        "y": 328
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 234,
+          "y": 327
+        },
+        "radius": 81
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 33,
+    "hash": 33,
+    "shapeInformations": {
+      "center": {
+        "x": 802,
+        "y": 318
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 780,
+          "y": 346
+        },
+        "radius": 45
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 34,
+    "hash": 34,
+    "shapeInformations": {
+      "center": {
+        "x": 84,
+        "y": 247
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 84,
+          "y": 247
+        },
+        "radius": 50
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 35,
+    "hash": 35,
+    "shapeInformations": {
+      "center": {
+        "x": 737,
+        "y": 266
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 697,
+          "y": 298
+        },
+        "radius": 46
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 36,
+    "hash": 36,
+    "shapeInformations": {
+      "center": {
+        "x": 307,
+        "y": 212
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 304,
+          "y": 205
+        },
+        "radius": 43
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 37,
+    "hash": 37,
+    "shapeInformations": {
+      "center": {
+        "x": 972,
+        "y": 194
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 981,
+          "y": 191
+        },
+        "radius": 35
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 38,
+    "hash": 38,
+    "shapeInformations": {
+      "center": {
+        "x": 647,
+        "y": 198
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 608,
+          "y": 210
+        },
+        "radius": 66
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 39,
+    "hash": 39,
+    "shapeInformations": {
+      "center": {
+        "x": 438,
+        "y": 186
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 454,
+          "y": 197
+        },
+        "radius": 62
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 40,
+    "hash": 40,
+    "shapeInformations": {
+      "center": {
+        "x": 790,
+        "y": 120
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 785,
+          "y": 115
+        },
+        "radius": 21
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 41,
+    "hash": 41,
+    "shapeInformations": {
+      "center": {
+        "x": 302,
+        "y": 91
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 302,
+          "y": 91
+        },
+        "radius": 32
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 42,
+    "hash": 42,
+    "shapeInformations": {
+      "center": {
+        "x": 135,
+        "y": 129
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 190,
+          "y": 135
+        },
+        "radius": 75
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 43,
+    "hash": 43,
+    "shapeInformations": {
+      "center": {
+        "x": 457,
+        "y": 93
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 457,
+          "y": 93
+        },
+        "radius": 38
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 44,
+    "hash": 44,
+    "shapeInformations": {
+      "center": {
+        "x": 608,
+        "y": 95
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 608,
+          "y": 95
+        },
+        "radius": 40
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 45,
+    "hash": 45,
+    "shapeInformations": {
+      "center": {
+        "x": 914,
+        "y": 113
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 903,
+          "y": 119
+        },
+        "radius": 67
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 46,
+    "hash": 46,
+    "shapeInformations": {
+      "center": {
+        "x": 885,
+        "y": 27
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 821,
+          "y": 40
+        },
+        "radius": 30
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 47,
+    "hash": 47,
+    "shapeInformations": {
+      "center": {
+        "x": 652,
+        "y": 36
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 737,
+          "y": 50
+        },
+        "radius": 41
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 48,
+    "hash": 48,
+    "shapeInformations": {
+      "center": {
+        "x": 360,
+        "y": 30
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 360,
+          "y": 40
+        },
+        "radius": 32
+      }
+    },
+    "landNeighbours": []
+  },
+  {
+    "id": 49,
+    "hash": 49,
+    "shapeInformations": {
+      "center": {
+        "x": 125,
+        "y": 26
+      },
+      "enclosedCircle": {
+        "center": {
+          "x": 125,
+          "y": 26
+        },
+        "radius": 26
+      }
+    },
+    "landNeighbours": []
+  }
+]
