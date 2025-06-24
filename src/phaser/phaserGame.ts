@@ -19,7 +19,7 @@ export default function initializePhaser(): void {
   let mapView: Map;
 
   function preload(this: Phaser.Scene) {
-    this.load.image('clouds', getAssetPath('/assets/clouds.png'));
+    mapView = new Map(this);
 
     const shaderItems = [
       {
@@ -31,7 +31,6 @@ export default function initializePhaser(): void {
     (async () => {
       const loadPipeline = Map.loadPipelines(this.game, shaderItems);
       await Promise.all([loadPipeline]);
-      mapView = new Map(this);
     })();
   }
 
@@ -40,14 +39,6 @@ export default function initializePhaser(): void {
   });
 
   function create(this: Phaser.Scene) {
-    this.add.image(this.scale.width / 2, this.scale.height / 2, 'clouds');
-    this.add
-      .text(this.scale.width / 2, this.scale.height / 2 + 100, 'Hello ! (Phaser)', {
-        fontSize: '70px',
-        color: '#fff'
-      })
-      .setOrigin(0.5);
-
     mapView.create();
   }
 

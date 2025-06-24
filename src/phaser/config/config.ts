@@ -33,7 +33,7 @@ export const mapViewTextures: MapViewTextures = {
 
 export const sceneParameters: SceneParameters = {
   sceneSize: {
-    width: 1200,
-    height: 1200
+    width: 1024,
+    height: 1024
   }
 };

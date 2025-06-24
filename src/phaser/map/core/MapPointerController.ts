@@ -80,7 +80,6 @@ export default class MapPointerController {
 
     mapSprite.on('pointermove', (pointer: Phaser.Input.Pointer) => {
       const pointerData = this.getPointerData(pointer, scene);
-      console.log(pointerData.bitmapColor, pointerData.quantization);
       this.emitter.emit('move', pointerData);
     });
   }

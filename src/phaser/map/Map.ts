@@ -1,6 +1,7 @@
 import MapViewPointerHandler from './core/MapPointerController';
 import MapRenderer from './rendering/MapRenderer';
 import { EventManager } from '../services/EventManager';
+import CameraController from './core/CameraController';
 import { QuantizationService } from './core/QuantizationService';
 import { MockProvinceRepository, ProvinceRepository } from './data/ProvinceRepository';
 import { loadShaderPipeline } from './rendering/loadShaderPipeline';
@@ -14,6 +15,7 @@ export default class Map {
   private initialized = false;
   private mapRenderer: MapRenderer;
   private eventManager: EventManager;
+  private cameraController: CameraController;
 
   constructor(
     public scene: Phaser.Scene,
@@ -23,6 +25,7 @@ export default class Map {
     this.eventManager = new EventManager();
     this.preload(mapViewTextures);
     this.mapRenderer = new MapRenderer(scene, this.quantizationService);
+    this.cameraController = new CameraController(scene);
   }
 
   private preload(sprites: MapViewTextures) {
@@ -40,9 +43,15 @@ export default class Map {
   async create() {
     this.provinceRepository.initialize();
 
+    const mapTexture = this.scene.textures.get(mapViewTextures.bitmap.key);
+    if (!mapTexture) throw new Error('Map texture not found');
+
+    const mapWidth = mapTexture.source[0].width;
+    const mapHeight = mapTexture.source[0].height;
+
     const pos = {
-      x: sceneParameters.sceneSize.width / 2,
-      y: sceneParameters.sceneSize.height / 2
+      x: sceneParameters.sceneSize.width / 2 - mapWidth / 2,
+      y: sceneParameters.sceneSize.height / 2 - mapHeight / 2
     } as Point;
 
     this.scene.add.image(pos.x, pos.y, mapViewTextures.initialProvincesDataTexture.key);
@@ -52,10 +61,7 @@ export default class Map {
     this.scene.add.image(pos.x, pos.y, mapViewTextures.blankMap.key);
 
     this.mapRenderer.displayMapImage(mapViewTextures.blankMap.key, pos);
-
     this.mapRenderer.setupMapViewPipelines(mapViewTextures);
-
-    console.log(sceneParameters.sceneSize.width, sceneParameters.sceneSize.height);
 
     this.initializePointerHandler(bitmap);
     this.mapRenderer.updateUniforms({ uClickTime: this.scene.time.now / 100 });
@@ -103,5 +109,6 @@ export default class Map {
   update(time: number) {
     if (!this.initialized) return;
     this.mapRenderer.update(time);
+    this.cameraController.update();
   }
 }
