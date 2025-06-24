@@ -5,6 +5,7 @@ export default function initializePhaser(): void {
     type: Phaser.AUTO,
     width: window.innerWidth,
     height: window.innerHeight,
+    parent: 'game-container',
     scene: {
       preload: preload,
       create: create,
