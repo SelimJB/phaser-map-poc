@@ -1,0 +1,34 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "build",
+			"type": "shell",
+			"command": "npm run build",
+			"group": {
+				"kind": "build"
+			},
+			"problemMatcher": ["$tsc"],
+			"detail": "Build the project using Vite"
+		},
+		{
+			"label": "dev",
+			"type": "shell",
+			"command": "npm run start",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"detail": "Start the development server using Vite"
+		},
+		{
+			"label": "serve",
+			"type": "shell",
+			"command": "npm run serve",
+			"group": "none",
+			"problemMatcher": [],
+			"detail": "Preview the production build using Vite"
+		}
+	]
+}

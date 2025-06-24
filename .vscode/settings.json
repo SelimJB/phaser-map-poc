@@ -1,0 +1,38 @@
+{
+    "eslint.enable": true,
+    "eslint.format.enable": true,
+    "eslint.debug": true,
+    "eslint.lintTask.enable": true,
+    "eslint.run": "onType",
+    "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+    "typescript.surveys.enabled": false,
+    "typescript.tsc.autoDetect": "on",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "eslint.workingDirectories": [
+        {
+            "mode": "location"
+        }
+    ],
+    "eslint.validate": [
+        "javascript",
+        "typescript",
+        "javascriptreact",
+        "typescriptreact"
+    ],
+    "editor.formatOnSave": true,
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}",
+        "${workspaceFolder}/scripts",
+        "./scripts/scripts2",
+        "./scripts/scripts"
+    ],
+    "jupyter.notebookFileRoot": "${workspaceFolder}",
+    "python.analysis.diagnosticMode": "workspace",
+    "[glsl]": {
+        "editor.formatOnSave": true
+    },
+    "files.associations": {
+        "*.frag": "glsl",
+        "*.vert": "glsl"
+    }
+}
