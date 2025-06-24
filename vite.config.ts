@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   publicDir: 'public',
-  base: '/',
+  base: process.env.NODE_ENV === 'production' ? '/phaser-map-poc/' : '/',
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx'],
     alias: {
