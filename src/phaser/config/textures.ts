@@ -3,23 +3,46 @@ import { MapTextures } from '../map-engine';
 export const simpleMapTextures: MapTextures = {
   map: {
     key: 'simple-map',
-    localUrl: '/assets/map/map.png'
+    localUrl: '/assets/simple-map/map.png'
   },
   bitmap: {
     key: 'simple-bitmap',
-    localUrl: '/assets/map/bitmap.png'
+    localUrl: '/assets/simple-map/bitmap.png'
   },
   mapBorders: {
     key: 'simple-mapBorders',
-    localUrl: '/assets/map/map_borders_transparency.png'
+    localUrl: '/assets/simple-map/borders.png'
   },
   blankMap: {
     key: 'simple-blankMap',
-    localUrl: '/assets/map/map_debug.png'
+    localUrl: '/assets/simple-map/map_debug.png'
   },
   initialProvincesDataTexture: {
     key: 'simple-initialProvincesDataTexture',
-    localUrl: '/assets/map/province_colors.png'
+    localUrl: '/assets/simple-map/province_colors.png'
+  }
+};
+
+export const europaMapTextures: MapTextures = {
+  map: {
+    key: 'europa-map',
+    localUrl: '/assets/europa-map/map.png'
+  },
+  bitmap: {
+    key: 'europa-bitmap',
+    localUrl: '/assets/europa-map/bitmap.png'
+  },
+  mapBorders: {
+    key: 'europa-mapBorders',
+    localUrl: '/assets/europa-map/borders.png'
+  },
+  blankMap: {
+    key: 'europa-blankMap',
+    localUrl: '/assets/europa-map/map_debug.png'
+  },
+  initialProvincesDataTexture: {
+    key: 'europa-initialProvincesDataTexture',
+    localUrl: '/assets/europa-map/province_colors.png'
   }
 };
 
@@ -34,7 +57,7 @@ export const worldMapTextures: MapTextures = {
   },
   mapBorders: {
     key: 'world-mapBorders',
-    localUrl: '/assets/world-map/map_borders_transparency.png'
+    localUrl: '/assets/world-map/borders.png'
   },
   blankMap: {
     key: 'world-blankMap',

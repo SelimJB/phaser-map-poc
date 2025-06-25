@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { MapType, simpleMapConfig, worldMapConfig } from './config';
+import { AVAILABLE_MAPS, MapType } from './config';
 import { MapEngine } from './map-engine';
 
 export default function initializePhaser(): void {
@@ -25,8 +25,9 @@ export default function initializePhaser(): void {
   const game = new Phaser.Game(config);
 
   function preload(this: Phaser.Scene) {
-    maps.set(MapType.SIMPLE, new MapEngine(this, simpleMapConfig));
-    maps.set(MapType.WORLD, new MapEngine(this, worldMapConfig));
+    for (const map of Object.values(AVAILABLE_MAPS)) {
+      maps.set(map.id, new MapEngine(this, map.config));
+    }
     currentMap = maps.get(MapType.SIMPLE)!;
   }
 

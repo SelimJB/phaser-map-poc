@@ -1,10 +1,10 @@
 import { SceneConfig } from '../map-engine';
-import { simpleMapConfig, worldMapConfig } from './maps';
+import { europaMapConfig, simpleMapConfig, worldMapConfig } from './mapConfigs';
 
 export enum MapType {
   SIMPLE = 'simple',
-  WORLD = 'world'
-  // EUROPE = 'europe'
+  WORLD = 'world',
+  EUROPA = 'europa'
 }
 
 export interface MapDefinition {
@@ -23,6 +23,11 @@ export const AVAILABLE_MAPS: Record<MapType, MapDefinition> = {
     id: MapType.WORLD,
     name: 'World Map',
     config: worldMapConfig
+  },
+  [MapType.EUROPA]: {
+    id: MapType.EUROPA,
+    name: 'Europa Map',
+    config: europaMapConfig
   }
 };
 

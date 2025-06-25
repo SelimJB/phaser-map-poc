@@ -19,6 +19,13 @@ const MapSwitcher: React.FC = () => {
     }
   };
 
+  const handleSwitchToEuropa = () => {
+    if (window.switchMap) {
+      window.switchMap(MapType.EUROPA);
+      setCurrentMap(MapType.EUROPA);
+    }
+  };
+
   useEffect(() => {
     if (window.getCurrentMapType) {
       setCurrentMap(window.getCurrentMapType());
@@ -42,6 +49,14 @@ const MapSwitcher: React.FC = () => {
         }`}
       >
         World Map
+      </button>
+      <button
+        onClick={handleSwitchToEuropa}
+        className={`${styles.button} ${
+          currentMap === MapType.EUROPA ? styles.buttonActive : styles.buttonInactive
+        }`}
+      >
+        Europa Map
       </button>
     </div>
   );
