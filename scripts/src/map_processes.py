@@ -57,6 +57,7 @@ def do_map_quantization(
     adjacency_list={},
     quantization_config: QuantizationConfig = QuantizationConfig(),
     font_size: float = 0.4,
+    sea_is_top_left: bool = False,
 ):
     skeleton_uint8 = (invert(skeleton) * 255).astype(np.uint8)
     map_color = cv2.cvtColor(skeleton_uint8, cv2.COLOR_GRAY2BGR)
@@ -67,8 +68,6 @@ def do_map_quantization(
             ProvinceShapeInformation((0, 0), Ellipse(), Circle((0, 0), 0)),
         )
     ]
-
-    cv2.floodFill(map_color, None, (0, 0), (0, 0, 250))
 
     for j, point in enumerate(points):
         shape_info = shape_informations[j]
@@ -84,6 +83,9 @@ def do_map_quantization(
         )
         province_data_views.append(provinceDataView)
         cv2.floodFill(map_color, None, (x, y), color)
+
+    if sea_is_top_left:
+        cv2.floodFill(map_color, None, (0, 0), (0, 0, 0))
 
     map_debug = None
     if debug:
@@ -236,38 +238,64 @@ def is_black_or_white_pixel(pixel: Tuple[int, int, int]) -> bool:
 
 def remove_white_lines_from_color_map(map_colors: np.ndarray, remove_black: bool = True) -> np.ndarray:
     map_colors_copy = map_colors.copy()
-    for y in range(0, map_colors.shape[0]):
-        for x in range(0, map_colors.shape[1]):
-            if is_black_or_white_pixel(map_colors[y, x]):
-                if x > 0 and not is_black_or_white_pixel(map_colors[y, x - 1]):
-                    map_colors_copy[y, x] = map_colors[y, x - 1]
-                elif y > 0 and not is_black_or_white_pixel(map_colors[y - 1, x]):
-                    map_colors_copy[y, x] = map_colors[y - 1, x]
-                elif x < map_colors.shape[1] - 1 and not is_black_or_white_pixel(
-                    map_colors[y, x + 1]
-                ):
-                    map_colors_copy[y, x] = map_colors[y, x + 1]
-                elif y < map_colors.shape[0] - 1 and not is_black_or_white_pixel(
-                    map_colors[y + 1, x]
-                ):
-                    map_colors_copy[y, x] = map_colors[y + 1, x]
+    white_mask = (
+        (map_colors[:, :, 0] == 255) &
+        (map_colors[:, :, 1] == 255) &
+        (map_colors[:, :, 2] == 255)
+    )
+    height, width = white_mask.shape
+
+    for x in range(height):
+        for y in range(width):
+            if white_mask[x, y]:
+                replacement_color = find_nearest_color(
+                    map_colors, white_mask, x, y)
+                map_colors_copy[x, y] = replacement_color
 
     if remove_black:
-        black_count = 0
-        for y in range(0, map_colors.shape[0]):
-            for x in range(0, map_colors.shape[1]):
-                if is_black_pixel(map_colors_copy[y, x]):
-                    black_count += 1
-                    # print("black " + str(x) + " " + str(y))
-                    if x > 0:
-                        map_colors_copy[y, x] = map_colors[y, x - 1]
-                    elif y > 0:
-                        map_colors_copy[y, x] = map_colors[y - 1, x]
-                    elif x < map_colors.shape[1] - 1:
-                        map_colors_copy[y, x] = map_colors[y, x + 1]
-                    elif y < map_colors.shape[0] - 1:
-                        map_colors_copy[y, x] = map_colors[y + 1, x]
+        black_mask = (
+            (map_colors[:, :, 0] == 0) &
+            (map_colors[:, :, 1] == 0) &
+            (map_colors[:, :, 2] == 0)
+        )
+
+        for x in range(height):
+            for y in range(width):
+                if black_mask[x, y]:
+                    replacement_color = find_nearest_color(
+                        map_colors, black_mask, x, y)
+                    map_colors_copy[x, y] = replacement_color
+
     return map_colors_copy
+
+
+def find_nearest_color(map_colors: np.ndarray, mask: np.ndarray, x: int, y: int) -> tuple[int, int, int]:
+    res = None
+
+    distance = 1
+    neighbors = [
+        (x, y-distance),
+        (x+distance, y),
+        (x, y+distance),
+        (x-distance, y),
+    ]
+
+    height, width = mask.shape
+
+    while res is None:
+        for nx, ny in neighbors:
+            if 0 <= nx < height and 0 <= ny < width:
+                if not mask[nx, ny]:
+                    res = tuple(map_colors[nx, ny])
+        distance += 1
+        neighbors = [
+            (x, y-distance),
+            (x+distance, y),
+            (x, y+distance),
+            (x-distance, y),
+        ]
+
+    return res
 
 
 def map_contours_to_grid(contours, cell_size=7):
