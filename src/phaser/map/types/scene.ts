@@ -18,6 +18,7 @@ export type MapInteractionData = {
 
 export type SceneConfig = {
   mapTextures: MapViewTextures;
+  provinceJsonKey: string;
   sceneSize: Size;
   provinceJson: string;
 };

@@ -63,16 +63,10 @@ export default class MapRenderer {
 
   static preload(scene: Phaser.Scene, sprites: MapViewTextures) {
     MapRenderer.loadTexture(scene, sprites.map);
-
-    if (sprites.highResBitmap) MapRenderer.loadTexture(scene, sprites.highResBitmap);
-    if (sprites.contrastMap) MapRenderer.loadTexture(scene, sprites.contrastMap);
-    if (sprites.shipTrailTexture) MapRenderer.loadTexture(scene, sprites.shipTrailTexture);
     MapRenderer.loadTexture(scene, sprites.bitmap);
     MapRenderer.loadTexture(scene, sprites.mapBorders);
-    MapRenderer.loadTexture(scene, sprites.fxBitmap);
     MapRenderer.loadTexture(scene, sprites.blankMap);
     MapRenderer.loadTexture(scene, sprites.initialProvincesDataTexture);
-    MapRenderer.loadTexture(scene, sprites.patternTexture);
 
     MapRenderer.loadedPipelines = [MapViewPipelineType.Default, MapViewPipelineType.Simplest];
     MapRenderer.loadedPipelines.map((item) => loadShaderPipeline(scene.game, item));
@@ -110,29 +104,16 @@ export default class MapRenderer {
     this.mapBorderTexture = this.scene.textures.get(
       mapTextures.mapBorders.key
     ).source[0].glTexture!;
-    const fxBitmap = this.scene.textures.get(mapTextures.fxBitmap.key).source[0];
-    fxBitmap.setFilter(Phaser.Textures.FilterMode.NEAREST);
 
     const provincesData = this.scene.textures.get(mapTextures.initialProvincesDataTexture.key)
       .source[0];
     provincesData.setFilter(Phaser.Textures.FilterMode.NEAREST);
-    // These textures are included in the provincesData texture
-    // const provinceColors = this.scene.textures.get(mapTextures.initialProvinceColorsTexture.key).source[0];
-    // provinceColors.setFilter(Phaser.Textures.FilterMode.NEAREST);
-    // const provincePattern = this.scene.textures.get(mapTextures.initialProvincePatternTexture.key).source[0];
-    // provincePattern.setFilter(Phaser.Textures.FilterMode.NEAREST);
-
-    // HACK : use a non power of 2 texture to avoid the automatic mipmapping which looks bad with patterns
-    const patternTexture = this.scene.textures.get(mapTextures.patternTexture.key).source[0];
-    // patternTexture.setFilter(Phaser.Textures.FilterMode.NEAREST);
 
     const textures = [
       blankMap.glTexture,
       this.bitmapTexture,
       this.mapBorderTexture,
-      fxBitmap.glTexture,
       provincesData.glTexture,
-      patternTexture.glTexture,
       this.mapTexture
     ] as MapTextureArray;
 

@@ -9,7 +9,7 @@ const float UVOffset=1./Dim;
 const vec2 PatternTextureOffset=vec2(0.,UVOffset);
 
 // INITIALISATION
-uniform sampler2D uMainSampler[7];
+uniform sampler2D uMainSampler[6];
 uniform float uQuantizationLevelAmount;
 uniform vec2 uMapResolution;
 
@@ -98,7 +98,7 @@ vec2 getUVFromQuant(int fragmentQuant,float textureDim){
 }
 
 vec4 sampleProvincesDataTexture(vec2 uv){
-    return texture2D(uMainSampler[4],uv);
+    return texture2D(uMainSampler[3],uv);
 }
 
 // Should be the same as : BitmapTextureHandler.ts -> getQuantizedValue
@@ -120,7 +120,7 @@ vec4 addPattern(vec4 provinceFragment,vec4 pattern,vec4 provincePattern){
 }
 
 int quantizeFromSmallBitmap(vec2 uv,vec2 offset){
-    vec4 contourFragment=texture2D(uMainSampler[3],uv+offset);
+    vec4 contourFragment=texture2D(uMainSampler[1],uv+offset);
     return quantizedColorLevel(contourFragment);
 }
 
@@ -141,7 +141,7 @@ void main(){
     vec2 pos=gl_FragCoord.xy;
     vec2 uv=outTexCoord;
     
-    vec4 mapTexture=texture2D(uMainSampler[6],uv);
+    vec4 mapTexture=texture2D(uMainSampler[4],uv);
     vec4 borderMapTexture=texture2D(uMainSampler[2],uv);
     vec4 quantMapTexture=texture2D(uMainSampler[1],uv);
     

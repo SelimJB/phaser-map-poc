@@ -1,13 +1,12 @@
 import React from 'react';
+import MapSwitcher from './MapSwitcher';
 import { UniformControls } from './UniformControls';
 
 const App: React.FC = () => {
   return (
     <div style={{ pointerEvents: 'auto' }}>
-      <h1 style={{ color: 'white', textAlign: 'center', marginTop: '20px' }}>
-        Hello ! (React)
-        <UniformControls />
-      </h1>
+      <MapSwitcher />
+      <UniformControls />
     </div>
   );
 };

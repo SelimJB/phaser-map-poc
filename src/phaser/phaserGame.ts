@@ -1,8 +1,12 @@
 import Phaser from 'phaser';
-import { simpleMapConfig } from './config/config';
-import { Map } from './map';
+import { MapType, simpleMapConfig, worldMapConfig } from './config';
+import { GameMap } from './map';
 
 export default function initializePhaser(): void {
+  const mapViews: Map<string, GameMap> = new Map();
+  let currentMapView: GameMap;
+  let currentMapType: MapType = MapType.SIMPLE;
+
   const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
     width: window.innerWidth,
@@ -19,21 +23,44 @@ export default function initializePhaser(): void {
   };
 
   const game = new Phaser.Game(config);
-  let mapView: Map;
 
   function preload(this: Phaser.Scene) {
-    mapView = new Map(this, simpleMapConfig);
+    mapViews.set(MapType.SIMPLE, new GameMap(this, simpleMapConfig));
+    mapViews.set(MapType.WORLD, new GameMap(this, worldMapConfig));
+    currentMapView = mapViews.get(MapType.SIMPLE)!;
+  }
+
+  function create(this: Phaser.Scene) {
+    currentMapView.create();
+  }
+
+  function update(this: Phaser.Scene) {
+    currentMapView.update(this.game.loop.time);
+  }
+
+  function switchMap(mapType: MapType) {
+    if (mapType === currentMapType) return;
+
+    const scene = game.scene.getScene('default');
+    if (!scene) return;
+
+    scene.children.removeAll();
+
+    currentMapView = mapViews.get(mapType) as GameMap;
+    currentMapView.create();
+    currentMapType = mapType;
   }
 
   window.addEventListener('resize', () => {
     game.scale.resize(window.innerWidth, window.innerHeight);
   });
+  window.switchMap = switchMap;
+  window.getCurrentMapType = () => currentMapType;
+}
 
-  function create(this: Phaser.Scene) {
-    mapView.create();
-  }
-
-  function update(this: Phaser.Scene) {
-    mapView.update(this.game.loop.time);
+declare global {
+  interface Window {
+    switchMap: (mapType: MapType) => void;
+    getCurrentMapType: () => MapType;
   }
 }

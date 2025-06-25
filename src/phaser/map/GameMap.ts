@@ -11,7 +11,7 @@ import { MapViewTextures } from './types/textures';
 import { uniformEvents, UniformChangeData } from '../services/uniformEvents';
 import { getAssetPath } from '../utils/getAssetPath';
 
-export default class Map {
+export default class GameMap {
   private initialized = false;
   private eventManager: EventManager;
   private cameraController: CameraController;
@@ -35,7 +35,10 @@ export default class Map {
     MapRenderer.preload(this.scene, sprites);
 
     if (this.sceneConfig.provinceJson) {
-      this.scene.load.json('provincesData', getAssetPath(this.sceneConfig.provinceJson));
+      this.scene.load.json(
+        this.sceneConfig.provinceJsonKey,
+        getAssetPath(this.sceneConfig.provinceJson)
+      );
     }
   }
 
@@ -43,8 +46,8 @@ export default class Map {
     let provincesData = null;
 
     if (this.sceneConfig.provinceJson) {
-      if (this.scene.cache.json.exists('provincesData')) {
-        provincesData = this.scene.cache.json.get('provincesData');
+      if (this.scene.cache.json.exists(this.sceneConfig.provinceJsonKey)) {
+        provincesData = this.scene.cache.json.get(this.sceneConfig.provinceJsonKey);
         console.log('Province data loaded successfully:', provincesData?.length || 0, 'provinces');
       } else {
         console.error('Province JSON data not found in cache. Available JSON keys:');
@@ -65,7 +68,6 @@ export default class Map {
     } as Point;
 
     this.scene.add.image(pos.x, pos.y, this.mapTextures.initialProvincesDataTexture.key);
-    this.scene.add.image(pos.x, pos.y, this.mapTextures.fxBitmap.key);
     const bitmap = this.scene.add.sprite(pos.x, pos.y, this.mapTextures.bitmap.key);
     bitmap.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.scene.add.image(pos.x, pos.y, this.mapTextures.blankMap.key);

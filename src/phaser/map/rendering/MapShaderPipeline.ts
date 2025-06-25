@@ -4,9 +4,9 @@ import { MapTextureArray, MapUniforms, MapUniformsBase, MapViewPipelineType } fr
 export const MapTextureIndices = {
   BITMAP: 1,
   BORDER: 2,
-  PROVINCE_DATA: 4,
-  PROVINCE_COLOR: 5,
-  MAIN_MAP: 6
+  PROVINCE_DATA: 3,
+  PROVINCE_COLOR: 3,
+  MAIN_MAP: 4
 } as const;
 
 export default class MapShaderPipeline extends Phaser.Renderer.WebGL.Pipelines.MultiPipeline {
