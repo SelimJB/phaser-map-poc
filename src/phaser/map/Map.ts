@@ -4,65 +4,74 @@ import { EventManager } from '../services/EventManager';
 import CameraController from './core/CameraController';
 import { QuantizationService } from './core/QuantizationService';
 import { MockProvinceRepository, ProvinceRepository } from './data/ProvinceRepository';
-import { loadShaderPipeline } from './rendering/loadShaderPipeline';
-import { MapPipelineItem, MapInteractionData, Color, MapUniforms } from './types';
-import { mapViewTextures, sceneParameters } from '../config/config';
+import { MapInteractionData, Color, MapUniforms, SceneConfig } from './types';
 import { calculateGlowingColor } from '../utils/colorUtils';
 import { Point } from './types/geometry';
 import { MapViewTextures } from './types/textures';
 import { uniformEvents, UniformChangeData } from '../services/uniformEvents';
+import { getAssetPath } from '../utils/getAssetPath';
 
 export default class Map {
   private initialized = false;
   private eventManager: EventManager;
   private cameraController: CameraController;
   private mapRenderer: MapRenderer;
+  private mapTextures: MapViewTextures;
 
   constructor(
     public scene: Phaser.Scene,
+    public sceneConfig: SceneConfig,
     private readonly quantizationService: QuantizationService = new QuantizationService(5),
     private readonly provinceRepository: ProvinceRepository = new MockProvinceRepository()
   ) {
     this.eventManager = new EventManager();
-    this.preload(mapViewTextures);
+    this.mapTextures = sceneConfig.mapTextures;
+    this.preload(this.mapTextures);
     this.mapRenderer = new MapRenderer(scene, this.quantizationService);
     this.cameraController = new CameraController(scene);
   }
 
   private preload(sprites: MapViewTextures) {
     MapRenderer.preload(this.scene, sprites);
+
+    if (this.sceneConfig.provinceJson) {
+      this.scene.load.json('provincesData', getAssetPath(this.sceneConfig.provinceJson));
+    }
   }
 
-  static async loadPipelines(game: Phaser.Game, shaderItems: MapPipelineItem[]) {
-    MapRenderer.loadedPipelines = shaderItems.map((s) => s.pipelineType);
+  create() {
+    let provincesData = null;
 
-    const loadPromises = shaderItems.map((item) => loadShaderPipeline(game, item.pipelineType));
+    if (this.sceneConfig.provinceJson) {
+      if (this.scene.cache.json.exists('provincesData')) {
+        provincesData = this.scene.cache.json.get('provincesData');
+        console.log('Province data loaded successfully:', provincesData?.length || 0, 'provinces');
+      } else {
+        console.error('Province JSON data not found in cache. Available JSON keys:');
+      }
+    }
 
-    await Promise.all(loadPromises);
-  }
+    this.provinceRepository.initialize(provincesData);
 
-  async create() {
-    this.provinceRepository.initialize();
-
-    const mapTexture = this.scene.textures.get(mapViewTextures.bitmap.key);
+    const mapTexture = this.scene.textures.get(this.mapTextures.bitmap.key);
     if (!mapTexture) throw new Error('Map texture not found');
 
     const mapWidth = mapTexture.source[0].width;
     const mapHeight = mapTexture.source[0].height;
 
     const pos = {
-      x: sceneParameters.sceneSize.width / 2 - mapWidth / 2,
-      y: sceneParameters.sceneSize.height / 2 - mapHeight / 2
+      x: this.sceneConfig.sceneSize.width / 2 - mapWidth / 2,
+      y: this.sceneConfig.sceneSize.height / 2 - mapHeight / 2
     } as Point;
 
-    this.scene.add.image(pos.x, pos.y, mapViewTextures.initialProvincesDataTexture.key);
-    this.scene.add.image(pos.x, pos.y, mapViewTextures.fxBitmap.key);
-    const bitmap = this.scene.add.sprite(pos.x, pos.y, mapViewTextures.bitmap.key);
+    this.scene.add.image(pos.x, pos.y, this.mapTextures.initialProvincesDataTexture.key);
+    this.scene.add.image(pos.x, pos.y, this.mapTextures.fxBitmap.key);
+    const bitmap = this.scene.add.sprite(pos.x, pos.y, this.mapTextures.bitmap.key);
     bitmap.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-    this.scene.add.image(pos.x, pos.y, mapViewTextures.blankMap.key);
+    this.scene.add.image(pos.x, pos.y, this.mapTextures.blankMap.key);
 
-    this.mapRenderer.displayMapImage(mapViewTextures.blankMap.key, pos);
-    this.mapRenderer.setupMapViewPipelines(mapViewTextures);
+    this.mapRenderer.displayMapImage(this.mapTextures.blankMap.key, pos);
+    this.mapRenderer.setupMapViewPipelines(this.mapTextures);
 
     this.initializePointerHandler(bitmap);
     this.mapRenderer.updateUniforms({ uClickTime: this.scene.time.now / 100 });
@@ -75,7 +84,8 @@ export default class Map {
       this.scene,
       bitmap,
       this.quantizationService,
-      this.provinceRepository
+      this.provinceRepository,
+      this.sceneConfig.sceneSize
     );
 
     pointerHandler.onPointerMove(this.onPointerMove.bind(this));

@@ -1,5 +1,6 @@
 import { getAssetPath } from '@/phaser/utils/getAssetPath';
 import { EventManager } from '@phaser/services/EventManager';
+import { loadShaderPipeline } from './loadShaderPipeline';
 import MapShaderPipeline from './MapShaderPipeline';
 import { QuantizationService } from '../core/QuantizationService';
 import { MapTextureArray, MapUniforms, MapUniformsBase, MapViewPipelineType, Vec2 } from '../types';
@@ -72,6 +73,9 @@ export default class MapRenderer {
     MapRenderer.loadTexture(scene, sprites.blankMap);
     MapRenderer.loadTexture(scene, sprites.initialProvincesDataTexture);
     MapRenderer.loadTexture(scene, sprites.patternTexture);
+
+    MapRenderer.loadedPipelines = [MapViewPipelineType.Default, MapViewPipelineType.Simplest];
+    MapRenderer.loadedPipelines.map((item) => loadShaderPipeline(scene.game, item));
   }
 
   update(time: number) {

@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
-import { Map, MapViewPipelineType, MapPipelineItem } from './map';
+import { simpleMapConfig } from './config/config';
+import { Map } from './map';
 
 export default function initializePhaser(): void {
   const config: Phaser.Types.Core.GameConfig = {
@@ -21,19 +22,7 @@ export default function initializePhaser(): void {
   let mapView: Map;
 
   function preload(this: Phaser.Scene) {
-    mapView = new Map(this);
-
-    const shaderItems = [
-      {
-        shaderPath: '/assets/map.frag',
-        pipelineType: MapViewPipelineType.Default
-      }
-    ] as MapPipelineItem[];
-
-    (async () => {
-      const loadPipeline = Map.loadPipelines(this.game, shaderItems);
-      await Promise.all([loadPipeline]);
-    })();
+    mapView = new Map(this, simpleMapConfig);
   }
 
   window.addEventListener('resize', () => {

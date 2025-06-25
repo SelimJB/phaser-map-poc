@@ -1,8 +1,7 @@
 import { ProvinceViewData, Quant, ProvinceId } from '../types';
-import provinces from './json/provinces.json';
 
 export interface ProvinceRepository {
-  initialize(): void;
+  initialize(provincesData?: ProvinceViewData[]): void;
   provinces: ProvinceViewData[];
   provincesByHash: Map<Quant, ProvinceViewData>;
   provincesById: Map<ProvinceId, ProvinceViewData>;
@@ -30,12 +29,19 @@ export class MockProvinceRepository implements ProvinceRepository {
     return this._provincesById;
   }
 
-  initialize() {
-    for (const province of provinces) {
+  initialize(provincesData?: ProvinceViewData[]) {
+    if (!provincesData) {
+      console.error('No province data provided');
+      return;
+    }
+
+    for (const province of provincesData) {
       this._provinces.push(province);
       this._provincesById.set(province.id, province);
       this._provincesByHash.set(province.hash, province);
     }
+
+    console.log('Provinces loaded successfully:', this._provinces.length);
   }
 
   getProvinceViewData(id: number, verbose = false): ProvinceViewData | undefined {

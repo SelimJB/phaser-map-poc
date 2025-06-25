@@ -1,9 +1,9 @@
-import { sceneParameters } from '@/phaser/config/config';
 import ColorQuantizer from './ColorQuantizer';
 import { QuantizationService } from './QuantizationService';
 import { ProvinceRepository } from '../data/ProvinceRepository';
 import { MapInteractionData, Color } from '../types';
 import { calculateAbsolutePosition, relativeTo } from './positionUtils';
+import { Size } from '../types/geometry';
 
 export default class MapPointerController {
   private emitter: Phaser.Events.EventEmitter;
@@ -36,7 +36,8 @@ export default class MapPointerController {
     scene: Phaser.Scene,
     bitmap: Phaser.GameObjects.Sprite,
     quantizationService: QuantizationService,
-    private provinceRepository: ProvinceRepository
+    private provinceRepository: ProvinceRepository,
+    private sceneSize: Size
   ) {
     this.emitter = new Phaser.Events.EventEmitter();
     this.initializeClickEvents(bitmap as Phaser.GameObjects.Sprite, scene);
@@ -93,11 +94,7 @@ export default class MapPointerController {
     const bitmapPixel = this.pixelQuantizer.getPixelColor(pxPosition.x, pxPosition.y);
     const bitmapColor: Color = [bitmapPixel.red, bitmapPixel.green, bitmapPixel.blue];
     const quantizedValue = this.pixelQuantizer.getQuantizedValue(pxPosition.x, pxPosition.y);
-    const absolutePixelPos = calculateAbsolutePosition(
-      pxPosition,
-      sceneParameters.sceneSize,
-      this.bitmap
-    );
+    const absolutePixelPos = calculateAbsolutePosition(pxPosition, this.sceneSize, this.bitmap);
 
     const province =
       quantizedValue !== 0
