@@ -5,10 +5,10 @@ export type MapTextureArray = [
 
 export type MapPipelineItem = {
   shaderPath: string;
-  pipelineType: MapViewPipelineType;
+  pipelineType: MapRenderingPipelineType;
 };
 
-export enum MapViewPipelineType {
+export enum MapRenderingPipelineType {
   Default = 'default',
   Simplest = 'simple'
 }

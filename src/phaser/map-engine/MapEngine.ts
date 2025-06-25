@@ -1,4 +1,4 @@
-import MapViewPointerHandler from './core/MapPointerController';
+import MapPointerController from './core/MapPointerController';
 import MapRenderer from './rendering/MapRenderer';
 import { EventManager } from '../services/EventManager';
 import CameraController from './core/CameraController';
@@ -7,16 +7,16 @@ import { MockProvinceRepository, ProvinceRepository } from './data/ProvinceRepos
 import { MapInteractionData, Color, MapUniforms, SceneConfig } from './types';
 import { calculateGlowingColor } from '../utils/colorUtils';
 import { Point } from './types/geometry';
-import { MapViewTextures } from './types/textures';
+import { MapTextures } from './types/textures';
 import { uniformEvents, UniformChangeData } from '../services/uniformEvents';
 import { getAssetPath } from '../utils/getAssetPath';
 
-export default class GameMap {
+export default class MapEngine {
   private initialized = false;
   private eventManager: EventManager;
   private cameraController: CameraController;
   private mapRenderer: MapRenderer;
-  private mapTextures: MapViewTextures;
+  private mapTextures: MapTextures;
 
   constructor(
     public scene: Phaser.Scene,
@@ -31,7 +31,7 @@ export default class GameMap {
     this.cameraController = new CameraController(scene);
   }
 
-  private preload(sprites: MapViewTextures) {
+  private preload(sprites: MapTextures) {
     MapRenderer.preload(this.scene, sprites);
 
     if (this.sceneConfig.provinceJson) {
@@ -73,7 +73,7 @@ export default class GameMap {
     this.scene.add.image(pos.x, pos.y, this.mapTextures.blankMap.key);
 
     this.mapRenderer.displayMapImage(this.mapTextures.blankMap.key, pos);
-    this.mapRenderer.setupMapViewPipelines(this.mapTextures);
+    this.mapRenderer.setupRenderingPipelines(this.mapTextures);
 
     this.initializePointerHandler(bitmap);
     this.mapRenderer.updateUniforms({ uClickTime: this.scene.time.now / 100 });
@@ -82,7 +82,7 @@ export default class GameMap {
   }
 
   private initializePointerHandler(bitmap: Phaser.GameObjects.Sprite) {
-    const pointerHandler = new MapViewPointerHandler(
+    const pointerHandler = new MapPointerController(
       this.scene,
       bitmap,
       this.quantizationService,

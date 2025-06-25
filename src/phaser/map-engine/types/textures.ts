@@ -1,4 +1,4 @@
-export type MapViewTextures = {
+export type MapTextures = {
   map: TextureItem;
   bitmap: TextureItem;
   mapBorders: TextureItem;

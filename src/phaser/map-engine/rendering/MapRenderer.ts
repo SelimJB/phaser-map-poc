@@ -3,13 +3,19 @@ import { EventManager } from '@phaser/services/EventManager';
 import { loadShaderPipeline } from './loadShaderPipeline';
 import MapShaderPipeline from './MapShaderPipeline';
 import { QuantizationService } from '../core/QuantizationService';
-import { MapTextureArray, MapUniforms, MapUniformsBase, MapViewPipelineType, Vec2 } from '../types';
+import {
+  MapTextureArray,
+  MapUniforms,
+  MapUniformsBase,
+  MapRenderingPipelineType,
+  Vec2
+} from '../types';
 import { defaultMapShaderUniforms } from './uniforms/defaultMapShaderUniforms';
 import { Point } from '../types/geometry';
-import { TextureItem, MapViewTextures } from '../types/textures';
+import { TextureItem, MapTextures } from '../types/textures';
 
 export default class MapRenderer {
-  static loadedPipelines: ReadonlyArray<MapViewPipelineType>;
+  static loadedPipelines: ReadonlyArray<MapRenderingPipelineType>;
   private nextFrameUniforms: MapUniforms = {};
   private currentUniforms!: MapUniformsBase;
   private _defaultUniforms: MapUniforms;
@@ -18,8 +24,8 @@ export default class MapRenderer {
   private bitmapTexture!: Phaser.Renderer.WebGL.Wrappers.WebGLTextureWrapper;
   private mapImage?: Phaser.GameObjects.Image;
   private layer?: Phaser.Tilemaps.TilemapLayer;
-  private currentPipelineType = MapViewPipelineType.Default;
-  private pipelines: Map<MapViewPipelineType, MapShaderPipeline> = new Map();
+  private currentPipelineType = MapRenderingPipelineType.Default;
+  private pipelines: Map<MapRenderingPipelineType, MapShaderPipeline> = new Map();
   private pipelineIdChangeEvent = new EventManager();
   private shaderDebugIdChangeEvent = new EventManager();
   isTweakShaderModeEnabled = false;
@@ -61,14 +67,17 @@ export default class MapRenderer {
     }
   }
 
-  static preload(scene: Phaser.Scene, sprites: MapViewTextures) {
+  static preload(scene: Phaser.Scene, sprites: MapTextures) {
     MapRenderer.loadTexture(scene, sprites.map);
     MapRenderer.loadTexture(scene, sprites.bitmap);
     MapRenderer.loadTexture(scene, sprites.mapBorders);
     MapRenderer.loadTexture(scene, sprites.blankMap);
     MapRenderer.loadTexture(scene, sprites.initialProvincesDataTexture);
 
-    MapRenderer.loadedPipelines = [MapViewPipelineType.Default, MapViewPipelineType.Simplest];
+    MapRenderer.loadedPipelines = [
+      MapRenderingPipelineType.Default,
+      MapRenderingPipelineType.Simplest
+    ];
     MapRenderer.loadedPipelines.map((item) => loadShaderPipeline(scene.game, item));
   }
 
@@ -92,7 +101,7 @@ export default class MapRenderer {
     this.pipeline.changeProvincesDataTexture(texture);
   }
 
-  setupMapViewPipelines(mapTextures: MapViewTextures) {
+  setupRenderingPipelines(mapTextures: MapTextures) {
     this.mapTexture = this.scene.textures.get(mapTextures.map.key).source[0].glTexture!;
 
     if (!this.mapTexture) throw new Error('No map texture');
@@ -152,7 +161,7 @@ export default class MapRenderer {
     this.mapImage = this.scene.add.image(position.x, position.y, imageKey);
   }
 
-  selectPipeline(pipelineType: MapViewPipelineType) {
+  selectPipeline(pipelineType: MapRenderingPipelineType) {
     this.currentPipelineType = pipelineType;
     this.mapImage?.setPipeline(this.pipeline);
     this.layer?.setPipeline(this.pipeline);
@@ -164,11 +173,11 @@ export default class MapRenderer {
     this.updateUniforms(uniforms);
   }
 
-  onPipelineIdChange(callback: (pipelineType: MapViewPipelineType | undefined) => void) {
+  onPipelineIdChange(callback: (pipelineType: MapRenderingPipelineType | undefined) => void) {
     this.pipelineIdChangeEvent.addHandler('pipelineIdChange', callback);
   }
 
-  onPipelineIdChangeRemove(callback: (pipelineType: MapViewPipelineType) => void) {
+  onPipelineIdChangeRemove(callback: (pipelineType: MapRenderingPipelineType) => void) {
     this.pipelineIdChangeEvent.removeHandler('pipelineIdChange', callback);
   }
 

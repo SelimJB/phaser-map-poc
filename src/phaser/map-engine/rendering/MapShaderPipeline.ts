@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { MapTextureArray, MapUniforms, MapUniformsBase, MapViewPipelineType } from '../types';
+import { MapTextureArray, MapUniforms, MapUniformsBase, MapRenderingPipelineType } from '../types';
 
 export const MapTextureIndices = {
   BITMAP: 1,
@@ -10,7 +10,7 @@ export const MapTextureIndices = {
 } as const;
 
 export default class MapShaderPipeline extends Phaser.Renderer.WebGL.Pipelines.MultiPipeline {
-  private type: MapViewPipelineType;
+  private type: MapRenderingPipelineType;
   private uniform: MapUniforms = {};
   private mainSample!: MapTextureArray;
 
@@ -18,7 +18,7 @@ export default class MapShaderPipeline extends Phaser.Renderer.WebGL.Pipelines.M
     return this.type;
   }
 
-  constructor(game: Phaser.Game, fragShader: string, key: MapViewPipelineType) {
+  constructor(game: Phaser.Game, fragShader: string, key: MapRenderingPipelineType) {
     const config = {
       game,
       renderer: game.renderer,

@@ -1,5 +1,6 @@
 import { MapType } from '@/phaser/config';
 import React, { useState, useEffect } from 'react';
+import styles from '../style/MapSwitcher.module.css';
 
 const MapSwitcher: React.FC = () => {
   const [currentMap, setCurrentMap] = useState<MapType>(MapType.SIMPLE);
@@ -25,39 +26,20 @@ const MapSwitcher: React.FC = () => {
   }, []);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        gap: '10px',
-        justifyContent: 'center',
-        marginBottom: '20px'
-      }}
-    >
+    <div className={styles.container}>
       <button
         onClick={handleSwitchToSimple}
-        style={{
-          padding: '10px 20px',
-          backgroundColor: currentMap === MapType.SIMPLE ? '#4CAF50' : '#666',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          transition: 'background-color 0.3s'
-        }}
+        className={`${styles.button} ${
+          currentMap === MapType.SIMPLE ? styles.buttonActive : styles.buttonInactive
+        }`}
       >
         Simple Map
       </button>
       <button
         onClick={handleSwitchToWorld}
-        style={{
-          padding: '10px 20px',
-          backgroundColor: currentMap === MapType.WORLD ? '#4CAF50' : '#666',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          transition: 'background-color 0.3s'
-        }}
+        className={`${styles.button} ${
+          currentMap === MapType.WORLD ? styles.buttonActive : styles.buttonInactive
+        }`}
       >
         World Map
       </button>

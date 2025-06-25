@@ -1,6 +1,6 @@
-import { MapViewTextures } from '../map';
+import { MapTextures } from '../map-engine';
 
-export const simpleMapTextures: MapViewTextures = {
+export const simpleMapTextures: MapTextures = {
   map: {
     key: 'simple-map',
     localUrl: '/assets/map/map.png'
@@ -23,7 +23,7 @@ export const simpleMapTextures: MapViewTextures = {
   }
 };
 
-export const worldMapTextures: MapViewTextures = {
+export const worldMapTextures: MapTextures = {
   map: {
     key: 'world-map',
     localUrl: '/assets/world-map/map.png'

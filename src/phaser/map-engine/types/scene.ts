@@ -1,7 +1,7 @@
 import { Color } from '.';
 import { Size } from './geometry';
-import { ProvinceViewData } from './province';
-import { MapViewTextures } from './textures';
+import { ProvinceData } from './province';
+import { MapTextures } from './textures';
 
 export type SceneParameters = {
   sceneSize: Size;
@@ -11,13 +11,13 @@ export type MapInteractionData = {
   pxPosition: { x: number; y: number };
   screenPosition: { x: number; y: number };
   absolutePxPosition: { x: number; y: number };
-  province?: ProvinceViewData;
+  province?: ProvinceData;
   quantization: number;
   bitmapColor: Color;
 };
 
 export type SceneConfig = {
-  mapTextures: MapViewTextures;
+  mapTextures: MapTextures;
   provinceJsonKey: string;
   sceneSize: Size;
   provinceJson: string;

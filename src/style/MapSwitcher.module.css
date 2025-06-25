@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.button {
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.buttonActive {
+  background-color: #4caf50;
+}
+
+.buttonInactive {
+  background-color: #666;
+}

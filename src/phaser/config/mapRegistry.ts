@@ -1,4 +1,4 @@
-import { SceneConfig } from '../map';
+import { SceneConfig } from '../map-engine';
 import { simpleMapConfig, worldMapConfig } from './maps';
 
 export enum MapType {

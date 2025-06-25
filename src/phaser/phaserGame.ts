@@ -1,10 +1,10 @@
 import Phaser from 'phaser';
 import { MapType, simpleMapConfig, worldMapConfig } from './config';
-import { GameMap } from './map';
+import { MapEngine } from './map-engine';
 
 export default function initializePhaser(): void {
-  const mapViews: Map<string, GameMap> = new Map();
-  let currentMapView: GameMap;
+  const maps: Map<MapType, MapEngine> = new Map();
+  let currentMap: MapEngine;
   let currentMapType: MapType = MapType.SIMPLE;
 
   const config: Phaser.Types.Core.GameConfig = {
@@ -25,17 +25,17 @@ export default function initializePhaser(): void {
   const game = new Phaser.Game(config);
 
   function preload(this: Phaser.Scene) {
-    mapViews.set(MapType.SIMPLE, new GameMap(this, simpleMapConfig));
-    mapViews.set(MapType.WORLD, new GameMap(this, worldMapConfig));
-    currentMapView = mapViews.get(MapType.SIMPLE)!;
+    maps.set(MapType.SIMPLE, new MapEngine(this, simpleMapConfig));
+    maps.set(MapType.WORLD, new MapEngine(this, worldMapConfig));
+    currentMap = maps.get(MapType.SIMPLE)!;
   }
 
   function create(this: Phaser.Scene) {
-    currentMapView.create();
+    currentMap.create();
   }
 
   function update(this: Phaser.Scene) {
-    currentMapView.update(this.game.loop.time);
+    currentMap.update(this.game.loop.time);
   }
 
   function switchMap(mapType: MapType) {
@@ -46,8 +46,8 @@ export default function initializePhaser(): void {
 
     scene.children.removeAll();
 
-    currentMapView = mapViews.get(mapType) as GameMap;
-    currentMapView.create();
+    currentMap = maps.get(mapType) as MapEngine;
+    currentMap.create();
     currentMapType = mapType;
   }
 

@@ -1,4 +1,4 @@
-import { SceneConfig } from '../map';
+import { SceneConfig } from '../map-engine';
 import { simpleMapTextures, worldMapTextures } from './textures';
 
 export const simpleMapConfig: SceneConfig = {
