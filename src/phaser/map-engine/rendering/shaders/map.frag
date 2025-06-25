@@ -214,8 +214,8 @@ void main(){
         gl_FragColor.rgb=mix(gl_FragColor.rgb,borderMapTexture.rgb,borderMapOpacity);
         
         // MOUSE ILLUMINATION
-        // if(uEnableMouseIllumination)
-        // gl_FragColor+=calculateMouseIllumination(outTexCoord,hoveredProvinceColor);
+        if(uEnableMouseIllumination)
+        gl_FragColor+=calculateMouseIllumination(outTexCoord,hoveredProvinceColor);
         return;
     }
     // -----------------------
@@ -321,9 +321,9 @@ void main(){
             
             // GLOW
             if(uEnableGlow){
-                vec4 sampleColor1=texture2D(uMainSampler[3],offset+uv);
-                vec4 sampleColor2=texture2D(uMainSampler[3],offset*.83+uv);
-                vec4 sampleColor3=texture2D(uMainSampler[3],offset*.68+uv);
+                vec4 sampleColor1=texture2D(uMainSampler[5],offset+uv);
+                vec4 sampleColor2=texture2D(uMainSampler[5],offset*.83+uv);
+                vec4 sampleColor3=texture2D(uMainSampler[5],offset*.68+uv);
                 if(uHoveredProvinceQuant==quantizedColorLevel(sampleColor1))sum+=sampleColor1;
                 if(uHoveredProvinceQuant==quantizedColorLevel(sampleColor2))sum+=sampleColor2;
                 if(uHoveredProvinceQuant==quantizedColorLevel(sampleColor3))sum+=sampleColor3;

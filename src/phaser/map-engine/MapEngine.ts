@@ -68,6 +68,7 @@ export default class MapEngine {
     } as Point;
 
     this.scene.add.image(pos.x, pos.y, this.mapTextures.initialProvincesDataTexture.key);
+    this.scene.add.image(pos.x, pos.y, this.mapTextures.fxBitmap.key);
     const bitmap = this.scene.add.sprite(pos.x, pos.y, this.mapTextures.bitmap.key);
     bitmap.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.scene.add.image(pos.x, pos.y, this.mapTextures.blankMap.key);
@@ -97,16 +98,19 @@ export default class MapEngine {
   private onPointerMove(data: MapInteractionData) {
     const { pxPosition: position, quantization } = data;
 
+    // this.mapColorizationManager.colorizer.getProvinceColor(quantization); // TODO
     const provinceColor = [0.4, 0.4, 0.4] as Color;
 
     const uGlowColor = calculateGlowingColor(provinceColor, 1, 1, 0.05, 0.2);
 
     const uniforms: MapUniforms = {
+      uSelectedProvinceQuant: quantization,
       uHoveredProvinceColor: provinceColor,
       uHoveredProvinceQuant: quantization,
       uMousePos: [position.x, position.y],
       uGlowColor
     };
+
     this.mapRenderer.updateUniforms(uniforms);
   }
 

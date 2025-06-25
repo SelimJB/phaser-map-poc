@@ -54,7 +54,6 @@ export default class MapShaderPipeline extends Phaser.Renderer.WebGL.Pipelines.M
     this.set1i('uUseOuterContour', uniforms.uUseOuterContour ? 1 : 0);
     this.set1f('uInnerContourSize', uniforms.uInnerContourSize);
     this.set1f('uOuterContourSize', uniforms.uOuterContourSize);
-    this.set1i('uGlowType', uniforms.uGlowType);
     this.set1f('uGlowIntensity', uniforms.uGlowIntensity);
     this.set1i('uEnableMouseIllumination', uniforms.uEnableMouseIllumination ? 1 : 0);
     this.set1f('uMouseIlluminationRadius', uniforms.uMouseIlluminationRadius);
@@ -208,10 +207,6 @@ export default class MapShaderPipeline extends Phaser.Renderer.WebGL.Pipelines.M
     if (uniform.uOuterContourSize !== undefined) {
       this.uniform.uOuterContourSize = uniform.uOuterContourSize;
       this.set1f('uOuterContourSize', uniform.uOuterContourSize);
-    }
-    if (uniform.uGlowType !== undefined) {
-      this.uniform.uGlowType = uniform.uGlowType;
-      this.set1i('uGlowType', uniform.uGlowType);
     }
     if (uniform.uGlowIntensity !== undefined) {
       this.uniform.uGlowIntensity = uniform.uGlowIntensity;

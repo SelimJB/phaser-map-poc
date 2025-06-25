@@ -54,7 +54,6 @@ export type MapUniformsBase = {
   uMouseIlluminationRadius: number;
   uMouseIlluminationIntensity: number;
   uEnableGlow: boolean;
-  uGlowType: number;
   uGlowColor?: Color;
   uGlowIntensity: number;
   uGlowRadius: number;

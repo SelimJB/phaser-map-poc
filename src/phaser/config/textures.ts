@@ -9,6 +9,10 @@ export const simpleMapTextures: MapTextures = {
     key: 'simple-bitmap',
     localUrl: '/assets/simple-map/bitmap.png'
   },
+  fxBitmap: {
+    key: 'simple-fxBitmap',
+    localUrl: '/assets/simple-map/bitmap.png'
+  },
   mapBorders: {
     key: 'simple-mapBorders',
     localUrl: '/assets/simple-map/borders.png'
@@ -32,6 +36,10 @@ export const europaMapTextures: MapTextures = {
     key: 'europa-bitmap',
     localUrl: '/assets/europa-map/bitmap.png'
   },
+  fxBitmap: {
+    key: 'europa-fxBitmap',
+    localUrl: '/assets/europa-map/bitmap.png'
+  },
   mapBorders: {
     key: 'europa-mapBorders',
     localUrl: '/assets/europa-map/borders.png'
@@ -53,6 +61,10 @@ export const worldMapTextures: MapTextures = {
   },
   bitmap: {
     key: 'world-bitmap',
+    localUrl: '/assets/world-map/bitmap.png'
+  },
+  fxBitmap: {
+    key: 'world-fxBitmap',
     localUrl: '/assets/world-map/bitmap.png'
   },
   mapBorders: {

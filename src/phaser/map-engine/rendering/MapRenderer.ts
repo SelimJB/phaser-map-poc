@@ -70,6 +70,7 @@ export default class MapRenderer {
   static preload(scene: Phaser.Scene, sprites: MapTextures) {
     MapRenderer.loadTexture(scene, sprites.map);
     MapRenderer.loadTexture(scene, sprites.bitmap);
+    MapRenderer.loadTexture(scene, sprites.fxBitmap);
     MapRenderer.loadTexture(scene, sprites.mapBorders);
     MapRenderer.loadTexture(scene, sprites.blankMap);
     MapRenderer.loadTexture(scene, sprites.initialProvincesDataTexture);
@@ -113,6 +114,8 @@ export default class MapRenderer {
     this.mapBorderTexture = this.scene.textures.get(
       mapTextures.mapBorders.key
     ).source[0].glTexture!;
+    const fxBitmap = this.scene.textures.get(mapTextures.fxBitmap.key).source[0];
+    fxBitmap.setFilter(Phaser.Textures.FilterMode.NEAREST);
 
     const provincesData = this.scene.textures.get(mapTextures.initialProvincesDataTexture.key)
       .source[0];
@@ -123,7 +126,8 @@ export default class MapRenderer {
       this.bitmapTexture,
       this.mapBorderTexture,
       provincesData.glTexture,
-      this.mapTexture
+      this.mapTexture,
+      fxBitmap.glTexture
     ] as MapTextureArray;
 
     const quantizationLevelCount = this.quantizationConfig.levelCount;
