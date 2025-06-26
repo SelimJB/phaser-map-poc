@@ -1,12 +1,7 @@
-import { Color, Vec2 } from '../../types';
+import { Color, MapUniforms } from '../../types';
 
-export const defaultMapShaderUniforms = {
-  uEnablePatterns: false,
-  uPatternSize: 90,
-  uEnablePulsations: false,
+export const defaultMapUniforms = {
   uHoveredProvinceColor: [0, 0, 0] as Color,
-  uPulsationPeriod: 2,
-  uPulsationIntensity: 0.2,
   uEnableHover: true,
   uVisualizationMethod: 3,
   uDisplayBlankMap: false,
@@ -19,35 +14,52 @@ export const defaultMapShaderUniforms = {
   uBlendFactorSecondary: 1,
   uHoverGrayscaleBlendFactor: 0.83,
   uUseAverageGrayWeights: false,
-  uGlowRadius: 0.02,
-  uGlowPulsationRadius: 0.055,
+  uGlowRadius: 0.011,
+  uGlowPulsationRadius: 0.005,
   uGlowPulsationPeriod: 5,
-  uGlowIntensity: 2.45,
+  uGlowIntensity: 2.05,
+  uGlowColor: [0.4, 0.4, 0.4] as Color,
+  uEnableGlow: true,
   uUseOuterContour: false,
   uUseContourAntialiasing: true,
   uContourIntensity: 1.1,
   uContourLuminosity: 0.19,
-  uInnerContourSize: 0.0035,
+  uInnerContourSize: 0.0045,
   uOuterContourSize: 0.002,
   uMouseIlluminationRadius: 0.2,
   uMouseIlluminationIntensity: 0.07,
   uEnableMouseIllumination: true,
-  uEnableGlow: true,
   uBorderMapOpacity: 1,
   uUseColoredBorders: false,
   uEnableContour: true,
   uContourOpacity: 1,
-  uInnerContourSample: 32,
+  uInnerContourSample: 16,
   uGlowAndOuterContourSample: 32,
   uUseUniformColorFetching: true,
-  uGlowColor: [0.4, 0.4, 0.4] as Color,
+  uEnablePulsations: true,
+  uPulsationPeriod: 5,
+  uPulsationIntensity: 0.05,
   uUseJunctionAntialiasing: true,
   uJunctionAntialiasingSize: 0.04,
-  uVisualitionMode: 0
+  uVisualitionMode: 0,
+  uEnablePatterns: false,
+  uPatternSize: 90
+};
+
+export const defaultSimpleMapUniforms: MapUniforms = {
+  ...defaultMapUniforms
+};
+
+export const defaultWorldMapUniforms: MapUniforms = {
+  ...defaultMapUniforms
+};
+
+export const defaultEuropaMapUniforms: MapUniforms = {
+  ...defaultMapUniforms
 };
 
 export const baseDefaultMouseUniforms = {
-  uMouseIlluminationRadius: defaultMapShaderUniforms.uMouseIlluminationRadius,
-  uMouseIlluminationIntensity: defaultMapShaderUniforms.uMouseIlluminationIntensity,
+  uMouseIlluminationRadius: defaultMapUniforms.uMouseIlluminationRadius,
+  uMouseIlluminationIntensity: defaultMapUniforms.uMouseIlluminationIntensity,
   uEnableMouseIllumination: true
 };

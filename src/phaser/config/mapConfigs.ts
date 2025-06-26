@@ -1,5 +1,10 @@
 import { SceneConfig } from '../map-engine';
 import { europaMapTextures, simpleMapTextures, worldMapTextures } from './textures';
+import {
+  defaultEuropaMapUniforms,
+  defaultSimpleMapUniforms,
+  defaultWorldMapUniforms
+} from '../map-engine/rendering/uniforms/defaultMapShaderUniforms';
 
 export const simpleMapConfig: SceneConfig = {
   mapTextures: simpleMapTextures,
@@ -8,7 +13,8 @@ export const simpleMapConfig: SceneConfig = {
     height: 2048
   },
   provinceJsonKey: 'simple-provinces',
-  provinceJson: '/assets/simple-map/provinces.json'
+  provinceJson: '/assets/simple-map/provinces.json',
+  defaultMapUniforms: defaultSimpleMapUniforms
 };
 
 export const worldMapConfig: SceneConfig = {
@@ -18,7 +24,8 @@ export const worldMapConfig: SceneConfig = {
     height: 2048
   },
   provinceJsonKey: 'world-provinces',
-  provinceJson: '/assets/world-map/provinces.json'
+  provinceJson: '/assets/world-map/provinces.json',
+  defaultMapUniforms: defaultWorldMapUniforms
 };
 
 export const europaMapConfig: SceneConfig = {
@@ -28,5 +35,6 @@ export const europaMapConfig: SceneConfig = {
     height: 2048
   },
   provinceJsonKey: 'europa-provinces',
-  provinceJson: '/assets/europa-map/provinces.json'
+  provinceJson: '/assets/europa-map/provinces.json',
+  defaultMapUniforms: defaultEuropaMapUniforms
 };

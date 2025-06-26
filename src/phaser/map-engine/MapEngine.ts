@@ -5,7 +5,7 @@ import CameraController from './core/CameraController';
 import { QuantizationService } from './core/QuantizationService';
 import { MockProvinceRepository, ProvinceRepository } from './data/ProvinceRepository';
 import { InteractionMapEvent, RenderMapEvent } from './events/events';
-import { MapInteractionData, Color, MapUniforms, SceneConfig, UniformChangeData } from './types';
+import { MapInteractionData, MapUniforms, SceneConfig, UniformChangeData } from './types';
 import { calculateGlowingColor } from '../utils/colorUtils';
 import { Point } from './types/geometry';
 import { MapTextures } from './types/textures';
@@ -30,9 +30,14 @@ export default class MapEngine {
     this.eventManager = new EventManager();
     this.mapTextures = sceneConfig.mapTextures;
     this.preload(this.mapTextures);
-    this.mapRenderer = new MapRenderer(scene, this.quantizationService);
-    this.cameraController = new CameraController(scene);
     this.textureGenerator = new MapColorizationTextureGenerator(scene, provinceRepository);
+    this.mapRenderer = new MapRenderer(
+      scene,
+      this.quantizationService,
+      this.textureGenerator,
+      this.sceneConfig.defaultMapUniforms
+    );
+    this.cameraController = new CameraController(scene);
   }
 
   private preload(sprites: MapTextures) {
@@ -52,7 +57,6 @@ export default class MapEngine {
     if (this.sceneConfig.provinceJson) {
       if (this.scene.cache.json.exists(this.sceneConfig.provinceJsonKey)) {
         provincesData = this.scene.cache.json.get(this.sceneConfig.provinceJsonKey);
-        console.log('Province data loaded successfully:', provincesData?.length || 0, 'provinces');
       } else {
         console.error('Province JSON data not found in cache. Available JSON keys:');
       }
@@ -94,10 +98,11 @@ export default class MapEngine {
   }
 
   private onPointerMove(data: MapInteractionData) {
+    if (data.quantization === 0) return;
+
     const { pxPosition: position, quantization } = data;
 
-    // this.mapColorizationManager.colorizer.getProvinceColor(quantization); // TODO
-    const provinceColor = [0.4, 0.4, 0.4] as Color;
+    const provinceColor = this.textureGenerator.getProvinceColor(quantization);
 
     const uGlowColor = calculateGlowingColor(provinceColor, 1, 1, 0.05, 0.2);
 
@@ -124,13 +129,10 @@ export default class MapEngine {
       this.mapRenderer.updateUniforms({ [data.uniform]: data.value });
     });
 
-    mapControlBridge.addHandler(RenderMapEvent.ShuffleColors, this.shuffleColors.bind(this));
-  }
-
-  // TODO: move
-  private shuffleColors() {
-    const colorsTexture = this.textureGenerator.generateProvinceColorsTexture();
-    this.mapRenderer.changeProvinceColorTexture(colorsTexture.source[0].glTexture!);
+    mapControlBridge.addHandler(
+      RenderMapEvent.ShuffleColors,
+      this.mapRenderer.shuffleColors.bind(this.mapRenderer)
+    );
   }
 
   update(time: number) {

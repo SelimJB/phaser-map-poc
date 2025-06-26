@@ -1,8 +1,11 @@
 import { EventManager } from '@/phaser/services/EventManager';
 import { getAssetPath } from '@/phaser/utils/getAssetPath';
 import { loadShaderPipeline } from './loadShaderPipeline';
+import MapColorizationTextureGenerator from './MapColorizationTextureGenerator';
 import MapShaderPipeline from './MapShaderPipeline';
 import { QuantizationService } from '../core/QuantizationService';
+import { RenderMapEvent } from '../events/events';
+import { mapControlBridge } from '../events/mapControlBridge';
 import {
   MapTextureArray,
   MapUniforms,
@@ -10,7 +13,7 @@ import {
   MapRenderingPipelineType,
   Vec2
 } from '../types';
-import { defaultMapShaderUniforms } from './uniforms/defaultMapShaderUniforms';
+import { defaultMapUniforms } from './uniforms/defaultMapShaderUniforms';
 import { Point } from '../types/geometry';
 import { TextureItem, MapTextures } from '../types/textures';
 
@@ -32,12 +35,15 @@ export default class MapRenderer {
 
   constructor(
     private scene: Phaser.Scene,
-    private quantizationConfig: QuantizationService
+    private quantizationConfig: QuantizationService,
+    private textureGenerator: MapColorizationTextureGenerator,
+    mapDefaultUniforms: MapUniforms
   ) {
     this.scene = scene;
 
     this._defaultUniforms = {
-      ...defaultMapShaderUniforms
+      ...defaultMapUniforms,
+      ...mapDefaultUniforms
     };
   }
 
@@ -144,11 +150,13 @@ export default class MapRenderer {
       };
 
       this.currentUniforms = {
-        ...defaultMapShaderUniforms,
+        ...defaultMapUniforms,
+        ...this._defaultUniforms,
         ...preprocessedInitializationUniforms
       };
 
       pipeline.initialize(this.currentUniforms);
+      mapControlBridge.emit(RenderMapEvent.ResetUniforms, this.currentUniforms);
     });
 
     if (this.mapImage) {
@@ -159,10 +167,16 @@ export default class MapRenderer {
     }
 
     this.pipeline.updateUniforms({});
+    this.shuffleColors();
   }
 
   displayMapImage(imageKey: string, position: Point) {
     this.mapImage = this.scene.add.image(position.x, position.y, imageKey);
+  }
+
+  shuffleColors() {
+    const colorsTexture = this.textureGenerator.generateProvinceColorsTexture();
+    this.pipeline.changeProvinceColorTexture(colorsTexture.source[0].glTexture!);
   }
 
   selectPipeline(pipelineType: MapRenderingPipelineType) {
@@ -174,6 +188,7 @@ export default class MapRenderer {
       ...this.currentUniforms,
       ...this.nextFrameUniforms
     };
+    mapControlBridge.emit(RenderMapEvent.ResetUniforms, this._defaultUniforms);
     this.updateUniforms(uniforms);
   }
 

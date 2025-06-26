@@ -37,8 +37,6 @@ export class MockProvinceRepository implements ProvinceRepository {
       this._provincesById.set(province.id, province);
       this._provincesByHash.set(province.hash, province);
     }
-
-    console.log('Provinces loaded successfully:', this._provinces.length);
   }
 
   getProvinceData(id: number, verbose = false): ProvinceData | undefined {

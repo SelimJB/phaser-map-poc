@@ -1,4 +1,4 @@
-import { Color } from '.';
+import { Color, MapUniforms } from '.';
 import { Size } from './geometry';
 import { ProvinceData } from './province';
 import { MapTextures } from './textures';
@@ -21,4 +21,5 @@ export type SceneConfig = {
   provinceJsonKey: string;
   sceneSize: Size;
   provinceJson: string;
+  defaultMapUniforms: MapUniforms;
 };

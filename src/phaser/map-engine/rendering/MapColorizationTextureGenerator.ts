@@ -1,12 +1,14 @@
-import { normalizedRgbToHexNumber } from '@/phaser/utils/colorUtils';
+import { hexToNormalizedRgb, normalizedRgbToHexNumber } from '@/phaser/utils/colorUtils';
 import Phaser from 'phaser';
 import { ProvinceRepository } from '../data/ProvinceRepository';
 import { Color } from '../types';
+import palette from './palettes/palette1.json';
 
 const TextureDim = 128;
 
 export default class MapColorizationTextureGenerator {
   static provinceColorsTextureKey = 'provinceColors';
+  private provinceColors: Map<number, Color> = new Map();
 
   constructor(
     private scene: Phaser.Scene,
@@ -19,9 +21,25 @@ export default class MapColorizationTextureGenerator {
     this._playerFactionIds = value;
   }
 
+  getProvinceColor(quant: number): Color {
+    const color = this.provinceColors.get(quant);
+    if (!color) {
+      console.error(`Province color for quant:${quant} not found`);
+      return [0, 0, 0] as Color;
+    }
+    return color;
+  }
+
   generateProvinceColorsTexture(): Phaser.Textures.Texture {
-    const provinceColors = this.viewData.provinces
-      .map((province) => [province.hash, Math.random(), Math.random(), Math.random()])
+    this.provinceColors = new Map(
+      this.viewData.provinces.map((province) => [
+        province.hash,
+        hexToNormalizedRgb(palette[Math.floor(Math.random() * palette.length)])
+      ])
+    );
+
+    const provinceColors = Array.from(this.provinceColors.entries())
+      .map(([hash, color]) => [hash, ...color])
       .flat();
 
     const graphics = this.scene.add.graphics();

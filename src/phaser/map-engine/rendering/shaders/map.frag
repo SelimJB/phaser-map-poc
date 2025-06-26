@@ -159,6 +159,13 @@ void main(){
     vec4 glow=vec4(0.);
     
     if(uVisualitionMode>.5){
+        if(uVisualitionMode>6.5){
+            float gray=dot(mapTexture.rgb,grayWeights);
+            float contrasted=clamp(uMiddleGray+gray*uContrast,0.,1.);
+            vec4 texInterpolated=vec4(contrasted,contrasted,contrasted,1);
+            gl_FragColor=texInterpolated;
+            return;
+        }
         if(uVisualitionMode>5.5){
             gl_FragColor=texture2D(uMainSampler[0],uv);
             return;

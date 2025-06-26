@@ -1,6 +1,7 @@
 import { RenderMapEvent } from '@/phaser/map-engine/events/events';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { mapControlBridge } from '../phaser/map-engine/events/mapControlBridge';
+import { MapUniformsBase } from '../phaser/map-engine/types';
 import styles from '../style/UniformControls.module.css';
 
 interface UniformControl {
@@ -19,7 +20,18 @@ interface DebugButton {
   description?: string;
 }
 
-const controls: UniformControl[] = [
+const VisualizationModes = {
+  0: 'Shader',
+  1: 'Bitmap',
+  2: 'Province Data',
+  3: 'Province Colors',
+  4: 'Main Map',
+  5: 'Borders',
+  6: 'Combined',
+  7: 'Gray'
+} as const;
+
+let controls: UniformControl[] = [
   {
     name: 'Contrast',
     uniform: 'uContrast',
@@ -80,7 +92,7 @@ const controls: UniformControl[] = [
     name: 'Visualization mode',
     uniform: 'uVisualitionMode',
     min: 0,
-    max: 6,
+    max: 7,
     step: 1,
     defaultValue: 0
   }
@@ -106,6 +118,26 @@ export const UniformControls: React.FC = () => {
     Object.fromEntries(controls.map((c) => [c.uniform, c.defaultValue]))
   );
   const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const handleUniformReset = (defaultUniforms: MapUniformsBase) => {
+      controls = controls.map((control) => ({
+        ...control,
+        defaultValue:
+          (defaultUniforms[control.uniform as keyof MapUniformsBase] as number) ??
+          control.defaultValue
+      }));
+
+      const newValues = Object.fromEntries(controls.map((c) => [c.uniform, c.defaultValue]));
+      setValues(newValues);
+    };
+
+    mapControlBridge.addHandler(RenderMapEvent.ResetUniforms, handleUniformReset);
+
+    return () => {
+      mapControlBridge.removeHandler(RenderMapEvent.ResetUniforms, handleUniformReset);
+    };
+  }, []);
 
   const handleChange = (uniform: string, value: number) => {
     setValues((prev) => ({ ...prev, [uniform]: value }));
@@ -142,8 +174,16 @@ export const UniformControls: React.FC = () => {
         {controls.map((control) => (
           <div key={control.uniform} className={styles.uniformControlGroup}>
             <div className={styles.uniformControlHeader}>
-              <span>{control.name}</span>
-              <span>{values[control.uniform].toFixed(2)}</span>
+              <span>
+                {control.name}
+                {control.uniform === 'uVisualitionMode' && (
+                  <span className={styles.visualizationMode}>
+                    :{' '}
+                    {VisualizationModes[values[control.uniform] as keyof typeof VisualizationModes]}
+                  </span>
+                )}
+              </span>
+              <span>{values[control.uniform].toFixed(control.step < 1 ? 2 : 0)}</span>
             </div>
             <input
               type="range"
