@@ -4,8 +4,8 @@ import { europaMapTextures, simpleMapTextures, worldMapTextures } from './textur
 export const simpleMapConfig: SceneConfig = {
   mapTextures: simpleMapTextures,
   sceneSize: {
-    width: 1024,
-    height: 1024
+    width: 2048,
+    height: 2048
   },
   provinceJsonKey: 'simple-provinces',
   provinceJson: '/assets/simple-map/provinces.json'
@@ -14,8 +14,8 @@ export const simpleMapConfig: SceneConfig = {
 export const worldMapConfig: SceneConfig = {
   mapTextures: worldMapTextures,
   sceneSize: {
-    width: 1600,
-    height: 1600
+    width: 2048,
+    height: 2048
   },
   provinceJsonKey: 'world-provinces',
   provinceJson: '/assets/world-map/provinces.json'
@@ -24,8 +24,8 @@ export const worldMapConfig: SceneConfig = {
 export const europaMapConfig: SceneConfig = {
   mapTextures: europaMapTextures,
   sceneSize: {
-    width: 1024,
-    height: 1024
+    width: 2048,
+    height: 2048
   },
   provinceJsonKey: 'europa-provinces',
   provinceJson: '/assets/europa-map/provinces.json'

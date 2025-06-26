@@ -4,7 +4,7 @@ varying vec2 outTexCoord;
 const vec2 Teta=vec2(.001);
 
 const float ProvinceTextureSize=128.;
-const float Dim=2.;//Number of sub textures in the ProvincesData texture
+const float Dim=1.;//Number of sub textures in the ProvincesData texture
 const float UVOffset=1./Dim;
 const vec2 PatternTextureOffset=vec2(0.,UVOffset);
 
@@ -72,6 +72,8 @@ uniform float uOuterContourSize;
 //// Sampling
 uniform int uInnerContourSample;
 uniform int uGlowAndOuterContourSample;
+//// Visualization mode
+uniform float uVisualitionMode;
 
 const vec3 grayWeights=vec3(.9,.075,.025);
 
@@ -155,6 +157,33 @@ void main(){
     float hoveredProvinceOpacity=0.;
     
     vec4 glow=vec4(0.);
+    
+    if(uVisualitionMode>.5){
+        if(uVisualitionMode>5.5){
+            gl_FragColor=texture2D(uMainSampler[0],uv);
+            return;
+        }
+        if(uVisualitionMode>4.5){
+            gl_FragColor=texture2D(uMainSampler[1],uv);
+            return;
+        }
+        if(uVisualitionMode>3.5){
+            gl_FragColor=texture2D(uMainSampler[2],uv);
+            return;
+        }
+        if(uVisualitionMode>2.5){
+            gl_FragColor=texture2D(uMainSampler[3],uv);
+            return;
+        }
+        if(uVisualitionMode>1.5){
+            gl_FragColor=texture2D(uMainSampler[4],uv);
+            return;
+        }
+        if(uVisualitionMode>.5){
+            gl_FragColor=texture2D(uMainSampler[5],uv);
+            return;
+        }
+    }
     
     float innerContourOpacity=0.;
     float outerContourOpacity=0.;

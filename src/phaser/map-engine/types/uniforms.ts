@@ -21,6 +21,11 @@ export type ColorRgba = [number, number, number, number];
 
 export type MapUniforms = Partial<MapUniformsBase>;
 
+export interface UniformChangeData {
+  uniform: string;
+  value: number;
+}
+
 export type MapUniformsBase = {
   uMapTextureArray: MapTextureArray;
   uQuantizationLevelAmount: number;
@@ -71,4 +76,5 @@ export type MapUniformsBase = {
   uGlowAndOuterContourSample: number;
   uUseJunctionAntialiasing: boolean;
   uJunctionAntialiasingSize: number;
+  uVisualitionMode: number;
 };

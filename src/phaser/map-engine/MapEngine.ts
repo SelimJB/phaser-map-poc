@@ -10,12 +10,15 @@ import { Point } from './types/geometry';
 import { MapTextures } from './types/textures';
 import { uniformEvents, UniformChangeData } from '../services/uniformEvents';
 import { getAssetPath } from '../utils/getAssetPath';
+import { mapControlBridge } from './events/mapControlBridge';
+import MapColorizationTextureGenerator from './rendering/MapColorizationTextureGenerator';
 
 export default class MapEngine {
   private initialized = false;
   private eventManager: EventManager;
   private cameraController: CameraController;
   private mapRenderer: MapRenderer;
+  private textureGenerator: MapColorizationTextureGenerator;
   private mapTextures: MapTextures;
 
   constructor(
@@ -29,6 +32,7 @@ export default class MapEngine {
     this.preload(this.mapTextures);
     this.mapRenderer = new MapRenderer(scene, this.quantizationService);
     this.cameraController = new CameraController(scene);
+    this.textureGenerator = new MapColorizationTextureGenerator(scene, provinceRepository);
   }
 
   private preload(sprites: MapTextures) {
@@ -59,13 +63,7 @@ export default class MapEngine {
     const mapTexture = this.scene.textures.get(this.mapTextures.bitmap.key);
     if (!mapTexture) throw new Error('Map texture not found');
 
-    const mapWidth = mapTexture.source[0].width;
-    const mapHeight = mapTexture.source[0].height;
-
-    const pos = {
-      x: this.sceneConfig.sceneSize.width / 2 - mapWidth / 2,
-      y: this.sceneConfig.sceneSize.height / 2 - mapHeight / 2
-    } as Point;
+    const pos = { x: 0, y: 0 } as Point;
 
     this.scene.add.image(pos.x, pos.y, this.mapTextures.initialProvincesDataTexture.key);
     this.scene.add.image(pos.x, pos.y, this.mapTextures.fxBitmap.key);

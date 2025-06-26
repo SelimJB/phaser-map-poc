@@ -1,5 +1,5 @@
+import { EventManager } from '@/phaser/services/EventManager';
 import { getAssetPath } from '@/phaser/utils/getAssetPath';
-import { EventManager } from '@phaser/services/EventManager';
 import { loadShaderPipeline } from './loadShaderPipeline';
 import MapShaderPipeline from './MapShaderPipeline';
 import { QuantizationService } from '../core/QuantizationService';

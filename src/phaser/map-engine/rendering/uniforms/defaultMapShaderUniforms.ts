@@ -42,7 +42,8 @@ export const defaultMapShaderUniforms = {
   uUseUniformColorFetching: true,
   uGlowColor: [0.4, 0.4, 0.4] as Color,
   uUseJunctionAntialiasing: true,
-  uJunctionAntialiasingSize: 0.04
+  uJunctionAntialiasingSize: 0.04,
+  uVisualitionMode: 0
 };
 
 export const baseDefaultMouseUniforms = {

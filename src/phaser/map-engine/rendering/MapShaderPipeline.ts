@@ -78,6 +78,7 @@ export default class MapShaderPipeline extends Phaser.Renderer.WebGL.Pipelines.M
     this.set1f('uPatternSize', uniforms.uPatternSize);
     this.set1i('uUseJunctionAntialiasing', uniforms.uUseJunctionAntialiasing ? 1 : 0);
     this.set1f('uJunctionAntialiasingSize', uniforms.uJunctionAntialiasingSize);
+    this.set1f('uVisualitionMode', uniforms.uVisualitionMode);
   }
 
   private refreshTextureBindings() {
@@ -300,6 +301,10 @@ export default class MapShaderPipeline extends Phaser.Renderer.WebGL.Pipelines.M
     if (uniform.uJunctionAntialiasingSize !== undefined) {
       this.uniform.uJunctionAntialiasingSize = uniform.uJunctionAntialiasingSize;
       this.set1f('uJunctionAntialiasingSize', uniform.uJunctionAntialiasingSize);
+    }
+    if (uniform.uVisualitionMode !== undefined) {
+      this.uniform.uVisualitionMode = uniform.uVisualitionMode;
+      this.set1f('uVisualitionMode', uniform.uVisualitionMode);
     }
   }
 }
