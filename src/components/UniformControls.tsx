@@ -1,5 +1,6 @@
+import { RenderMapEvent } from '@/phaser/map-engine/events/events';
 import React, { useState } from 'react';
-import { uniformEvents } from '../phaser/services/uniformEvents';
+import { mapControlBridge } from '../phaser/map-engine/events/mapControlBridge';
 import styles from '../style/UniformControls.module.css';
 
 interface UniformControl {
@@ -9,6 +10,13 @@ interface UniformControl {
   max: number;
   step: number;
   defaultValue: number;
+}
+
+interface DebugButton {
+  name: string;
+  action: RenderMapEvent;
+  icon?: string;
+  description?: string;
 }
 
 const controls: UniformControl[] = [
@@ -67,6 +75,29 @@ const controls: UniformControl[] = [
     max: 0.05,
     step: 0.01,
     defaultValue: 0.02
+  },
+  {
+    name: 'Visualization mode',
+    uniform: 'uVisualitionMode',
+    min: 0,
+    max: 6,
+    step: 1,
+    defaultValue: 0
+  }
+];
+
+const debugButtons: DebugButton[] = [
+  {
+    name: 'Reset Uniforms',
+    action: RenderMapEvent.ResetUniforms,
+    icon: '🔄',
+    description: 'Reset all uniforms to default values'
+  },
+  {
+    name: 'Shuffle Colors',
+    action: RenderMapEvent.ShuffleColors,
+    icon: '✨',
+    description: 'Shuffle province colors'
   }
 ];
 
@@ -78,7 +109,22 @@ export const UniformControls: React.FC = () => {
 
   const handleChange = (uniform: string, value: number) => {
     setValues((prev) => ({ ...prev, [uniform]: value }));
-    uniformEvents.emit('uniformChange', { uniform, value });
+    mapControlBridge.emit('uniformChange', { uniform, value });
+  };
+
+  const handleDebugAction = (action: RenderMapEvent) => {
+    if (action === RenderMapEvent.ResetUniforms) {
+      const defaultValues = Object.fromEntries(controls.map((c) => [c.uniform, c.defaultValue]));
+      setValues(defaultValues);
+      controls.forEach((control) => {
+        mapControlBridge.emit('uniformChange', {
+          uniform: control.uniform,
+          value: control.defaultValue
+        });
+      });
+    } else {
+      mapControlBridge.emit(action);
+    }
   };
 
   return (
@@ -92,6 +138,7 @@ export const UniformControls: React.FC = () => {
       </button>
       <div className={styles.uniformContainer}>
         <h3 className={styles.uniformTitle}>Render Settings</h3>
+
         {controls.map((control) => (
           <div key={control.uniform} className={styles.uniformControlGroup}>
             <div className={styles.uniformControlHeader}>
@@ -109,6 +156,23 @@ export const UniformControls: React.FC = () => {
             />
           </div>
         ))}
+
+        <div className={styles.debugSection}>
+          <h4 className={styles.debugTitle}>Debug Controls</h4>
+          <div className={styles.debugButtonGrid}>
+            {debugButtons.map((button) => (
+              <button
+                key={button.action}
+                className={styles.debugButton}
+                onClick={() => handleDebugAction(button.action)}
+                title={button.description}
+              >
+                {button.icon && <span className={styles.debugButtonIcon}>{button.icon}</span>}
+                <span className={styles.debugButtonText}>{button.name}</span>
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

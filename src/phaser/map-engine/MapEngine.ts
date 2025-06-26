@@ -4,11 +4,11 @@ import { EventManager } from '../services/EventManager';
 import CameraController from './core/CameraController';
 import { QuantizationService } from './core/QuantizationService';
 import { MockProvinceRepository, ProvinceRepository } from './data/ProvinceRepository';
-import { MapInteractionData, Color, MapUniforms, SceneConfig } from './types';
+import { InteractionMapEvent, RenderMapEvent } from './events/events';
+import { MapInteractionData, Color, MapUniforms, SceneConfig, UniformChangeData } from './types';
 import { calculateGlowingColor } from '../utils/colorUtils';
 import { Point } from './types/geometry';
 import { MapTextures } from './types/textures';
-import { uniformEvents, UniformChangeData } from '../services/uniformEvents';
 import { getAssetPath } from '../utils/getAssetPath';
 import { mapControlBridge } from './events/mapControlBridge';
 import MapColorizationTextureGenerator from './rendering/MapColorizationTextureGenerator';
@@ -116,13 +116,21 @@ export default class MapEngine {
     const provinceViewData = data.province;
     if (!provinceViewData) return;
 
-    this.eventManager.emit('provinceClick', data);
+    this.eventManager.emit(InteractionMapEvent.ProvinceClick, data);
   }
 
   private initializeEvents() {
-    uniformEvents.addHandler('uniformChange', (data: UniformChangeData) => {
+    mapControlBridge.addHandler(RenderMapEvent.UniformChange, (data: UniformChangeData) => {
       this.mapRenderer.updateUniforms({ [data.uniform]: data.value });
     });
+
+    mapControlBridge.addHandler(RenderMapEvent.ShuffleColors, this.shuffleColors.bind(this));
+  }
+
+  // TODO: move
+  private shuffleColors() {
+    const colorsTexture = this.textureGenerator.generateProvinceColorsTexture();
+    this.mapRenderer.changeProvinceColorTexture(colorsTexture.source[0].glTexture!);
   }
 
   update(time: number) {
