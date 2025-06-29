@@ -388,7 +388,6 @@ export const controls: Control[] = [
     defaultValue: 0,
     order: 20
   },
-
   {
     type: ControlType.TITLE,
     name: 'Actions',

@@ -4,19 +4,13 @@ import { EventManager } from '../services/EventManager';
 import CameraController from './core/CameraController';
 import { QuantizationService } from './core/QuantizationService';
 import { MockProvinceRepository, ProvinceRepository } from './data/ProvinceRepository';
-import { DebugMapEvent, InteractionMapEvent, RenderMapEvent } from './events/events';
-import {
-  MapInteractionData,
-  MapUniforms,
-  SceneConfig,
-  UniformChangeData,
-  VisualizationModes
-} from './types';
+import { InteractionMapEvent } from './events/events';
+import { RenderEventHandler } from './events/RenderEventHandler';
+import { MapInteractionData, MapUniforms, SceneConfig } from './types';
 import { calculateGlowingColor } from '../utils/colorUtils';
 import { Point } from './types/geometry';
 import { MapTextures } from './types/textures';
 import { getAssetPath } from '../utils/getAssetPath';
-import { mapControlBridge } from './events/mapControlBridge';
 import MapColorizationTextureGenerator from './rendering/MapColorizationTextureGenerator';
 
 export default class MapEngine {
@@ -26,6 +20,7 @@ export default class MapEngine {
   private mapRenderer: MapRenderer;
   private textureGenerator: MapColorizationTextureGenerator;
   private mapTextures: MapTextures;
+  private renderEventHandler: RenderEventHandler;
 
   constructor(
     public scene: Phaser.Scene,
@@ -44,6 +39,7 @@ export default class MapEngine {
       this.sceneConfig.defaultMapUniforms
     );
     this.cameraController = new CameraController(scene);
+    this.renderEventHandler = new RenderEventHandler(this.mapRenderer);
   }
 
   private preload(sprites: MapTextures) {
@@ -86,7 +82,7 @@ export default class MapEngine {
 
     this.initializePointerHandler(bitmap);
     this.mapRenderer.updateUniforms({ uClickTime: this.scene.time.now / 100 });
-    this.initializeEvents();
+    this.renderEventHandler.initialize();
     this.initialized = true;
   }
 
@@ -134,25 +130,6 @@ export default class MapEngine {
     if (!provinceViewData) return;
 
     this.eventManager.emit(InteractionMapEvent.ProvinceClick, data);
-  }
-
-  private initializeEvents() {
-    mapControlBridge.addHandler(RenderMapEvent.UniformChange, (data: UniformChangeData) => {
-      this.mapRenderer.updateUniforms({ [data.uniform]: data.value });
-    });
-
-    mapControlBridge.addHandler(
-      RenderMapEvent.ShuffleColors,
-      this.mapRenderer.shuffleColors.bind(this.mapRenderer)
-    );
-
-    mapControlBridge.addHandler(DebugMapEvent.DisplayMapShader, () => {
-      this.mapRenderer.updateUniforms({ uVisualizationMode: VisualizationModes.Shader });
-    });
-
-    mapControlBridge.addHandler(DebugMapEvent.DisplayGrayscaleShader, () => {
-      this.mapRenderer.updateUniforms({ uVisualizationMode: VisualizationModes.Gray });
-    });
   }
 
   update(time: number) {
