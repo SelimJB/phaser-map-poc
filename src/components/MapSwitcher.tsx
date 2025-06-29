@@ -35,12 +35,12 @@ const MapSwitcher: React.FC = () => {
   return (
     <div className={styles.container}>
       <button
-        onClick={handleSwitchToSimple}
+        onClick={handleSwitchToEuropa}
         className={`${styles.button} ${
-          currentMap === MapType.SIMPLE ? styles.buttonActive : styles.buttonInactive
+          currentMap === MapType.EUROPA ? styles.buttonActive : styles.buttonInactive
         }`}
       >
-        Simple Map
+        Europa Map
       </button>
       <button
         onClick={handleSwitchToWorld}
@@ -51,12 +51,12 @@ const MapSwitcher: React.FC = () => {
         World Map
       </button>
       <button
-        onClick={handleSwitchToEuropa}
+        onClick={handleSwitchToSimple}
         className={`${styles.button} ${
-          currentMap === MapType.EUROPA ? styles.buttonActive : styles.buttonInactive
+          currentMap === MapType.SIMPLE ? styles.buttonActive : styles.buttonInactive
         }`}
       >
-        Europa Map
+        Simple Map
       </button>
     </div>
   );

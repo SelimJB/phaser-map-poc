@@ -160,8 +160,9 @@ void main(){
     
     if(uVisualizationMode>.5){
         if(uVisualizationMode>6.5){
-            float gray=dot(mapTexture.rgb,grayWeights);
-            float contrasted=clamp(uMiddleGray+gray*uContrast,0.,1.);
+            float gray=dot(mapTexture.rgb,grayWeights)*uGrayscaleBlendFactor+(1.-uGrayscaleBlendFactor);
+            float diff=gray-uMiddleGray;
+            float contrasted=clamp(uMiddleGray+diff*uContrast,0.,1.);
             vec4 texInterpolated=vec4(contrasted,contrasted,contrasted,1);
             gl_FragColor=texInterpolated;
             return;

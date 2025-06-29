@@ -36,7 +36,6 @@ export default class MapShaderPipeline extends Phaser.Renderer.WebGL.Pipelines.M
     this.set2fv('uMapResolution', uniforms.uMapResolution);
     this.set1f('uQuantizationLevelAmount', uniforms.uQuantizationLevelAmount);
     this.set1f('uBlendFactor', uniforms.uBlendFactor);
-    this.set1f('uBlendFactorSecondary', uniforms.uBlendFactorSecondary);
     this.set1f('uContrast', uniforms.uContrast);
     this.set1f('uMiddleGray', uniforms.uMiddleGray);
     this.set1f('uGrayscaleBlendFactor', uniforms.uGrayscaleBlendFactor);
@@ -122,10 +121,6 @@ export default class MapShaderPipeline extends Phaser.Renderer.WebGL.Pipelines.M
     if (uniform.uBlendFactor !== undefined) {
       this.uniform.uBlendFactor = uniform.uBlendFactor;
       this.set1f('uBlendFactor', uniform.uBlendFactor);
-    }
-    if (uniform.uBlendFactorSecondary !== undefined) {
-      this.uniform.uBlendFactorSecondary = uniform.uBlendFactorSecondary;
-      this.set1f('uBlendFactorSecondary', uniform.uBlendFactorSecondary);
     }
     if (uniform.uEnableHover !== undefined) {
       this.uniform.uEnableHover = uniform.uEnableHover;

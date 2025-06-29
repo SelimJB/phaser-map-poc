@@ -4,8 +4,14 @@ import { EventManager } from '../services/EventManager';
 import CameraController from './core/CameraController';
 import { QuantizationService } from './core/QuantizationService';
 import { MockProvinceRepository, ProvinceRepository } from './data/ProvinceRepository';
-import { InteractionMapEvent, RenderMapEvent } from './events/events';
-import { MapInteractionData, MapUniforms, SceneConfig, UniformChangeData } from './types';
+import { DebugMapEvent, InteractionMapEvent, RenderMapEvent } from './events/events';
+import {
+  MapInteractionData,
+  MapUniforms,
+  SceneConfig,
+  UniformChangeData,
+  VisualizationModes
+} from './types';
 import { calculateGlowingColor } from '../utils/colorUtils';
 import { Point } from './types/geometry';
 import { MapTextures } from './types/textures';
@@ -139,6 +145,14 @@ export default class MapEngine {
       RenderMapEvent.ShuffleColors,
       this.mapRenderer.shuffleColors.bind(this.mapRenderer)
     );
+
+    mapControlBridge.addHandler(DebugMapEvent.DisplayMapShader, () => {
+      this.mapRenderer.updateUniforms({ uVisualizationMode: VisualizationModes.Shader });
+    });
+
+    mapControlBridge.addHandler(DebugMapEvent.DisplayGrayscaleShader, () => {
+      this.mapRenderer.updateUniforms({ uVisualizationMode: VisualizationModes.Gray });
+    });
   }
 
   update(time: number) {

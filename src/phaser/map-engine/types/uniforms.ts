@@ -13,6 +13,17 @@ export enum MapRenderingPipelineType {
   Simplest = 'simple'
 }
 
+export enum VisualizationModes {
+  Shader = 0,
+  Bitmap = 1,
+  Plain = 2,
+  Colors = 3,
+  Borders = 4,
+  BitmapFX = 5,
+  Debug = 6,
+  Gray = 7
+}
+
 export type Vec2 = [number, number];
 export type Vec3 = [number, number, number];
 export type Vec4 = [number, number, number, number];
@@ -40,7 +51,6 @@ export type MapUniformsBase = {
   uSelectedProvinceQuant?: number;
   uClickTime?: number;
   uBlendFactor: number;
-  uBlendFactorSecondary: number;
   uContrast: number;
   uMiddleGray: number;
   uGrayscaleBlendFactor: number;

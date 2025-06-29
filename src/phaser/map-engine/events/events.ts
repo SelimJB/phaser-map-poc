@@ -12,4 +12,7 @@ export const enum InteractionMapEvent {
   BackgroundClick = 'backgroundClick'
 }
 
-export const enum DebugMapEvent {}
+export const enum DebugMapEvent {
+  DisplayMapShader = 'displayMapShader',
+  DisplayGrayscaleShader = 'displayGrayscaleShader'
+}

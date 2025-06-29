@@ -1,6 +1,6 @@
 import React from 'react';
 import MapSwitcher from './MapSwitcher';
-import { UniformControls } from './UniformControls';
+import { UniformControls } from './uniform-controls';
 
 const App: React.FC = () => {
   return (

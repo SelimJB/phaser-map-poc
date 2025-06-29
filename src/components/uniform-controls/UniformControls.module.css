@@ -1,7 +1,7 @@
 .uniformControls {
   position: fixed;
-  top: 10px;
-  right: 10px;
+  top: 20px;
+  right: 20px;
   transition: transform 0.3s ease-in-out;
   z-index: 999;
   transform: translateX(0);
@@ -17,9 +17,13 @@
   padding: 20px;
   border-radius: 8px;
   width: 280px;
+  max-height: 90vh;
   color: white;
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .uniformTitle {
@@ -156,4 +160,133 @@
   opacity: 0.7;
   font-size: 0.9em;
   margin-left: 4px;
+}
+
+.controlsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  flex: 1;
+  padding-right: 16px;
+  margin-right: -8px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Hide default scrollbar completely */
+.controlsContainer::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom scroll indicator */
+.scrollIndicator {
+  position: absolute;
+  right: 5px;
+  top: 60px;
+  bottom: 20px;
+  width: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.scrollThumb {
+  position: absolute;
+  right: 5px;
+  width: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  transition: all 0.1s ease;
+  min-height: 20px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.scrollThumb.active {
+  background: rgba(255, 255, 255, 0.2);
+  width: 10px;
+  right: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-weight: normal;
+  opacity: 0.8;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 16px 0 12px 0;
+}
+
+.sectionTitle:first-child {
+  margin-top: 0;
+}
+
+.toggleSection {
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.toggleControlGroup {
+  margin-bottom: 12px;
+}
+
+.toggleLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggleInput {
+  appearance: none;
+  width: 36px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  margin-right: 12px;
+  transition: background-color 0.1s;
+}
+
+.toggleInput:checked {
+  background: #4caf50;
+}
+
+.toggleInput::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  background: white;
+  transition: transform 0.1s;
+}
+
+.toggleInput:checked::before {
+  transform: translateX(16px);
+}
+
+.toggleText {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+
+.toggleDescription {
+  font-size: 11px;
+  opacity: 0.7;
+  margin-top: 2px;
+}
+
+.sliderSection {
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
