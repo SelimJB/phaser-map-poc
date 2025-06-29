@@ -24,6 +24,7 @@ export const UniformControls: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [scrollIndicator, setScrollIndicator] = useState({ show: false, top: 0, height: 0 });
   const [isScrolling, setIsScrolling] = useState(false);
+  const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -134,6 +135,15 @@ export const UniformControls: React.FC = () => {
             <div className={styles.uniformControlHeader}>
               <span>
                 {control.name}
+                {control.description && (
+                  <span
+                    className={styles.infoIcon}
+                    onMouseEnter={() => setActiveTooltip(control.uniform)}
+                    onMouseLeave={() => setActiveTooltip(null)}
+                  >
+                    ?
+                  </span>
+                )}
                 {control.uniform === 'uVisualizationMode' && (
                   <span className={styles.visualizationMode}>
                     :{' '}
@@ -147,15 +157,20 @@ export const UniformControls: React.FC = () => {
               </span>
               <span>{values[control.uniform].toFixed(control.step < 1 ? 2 : 0)}</span>
             </div>
-            <input
-              type="range"
-              min={control.min}
-              max={control.max}
-              step={control.step}
-              value={values[control.uniform]}
-              onChange={(e) => handleChange(control.uniform, parseFloat(e.target.value))}
-              className={styles.uniformSlider}
-            />
+            <div className={styles.sliderContainer}>
+              <input
+                type="range"
+                min={control.min}
+                max={control.max}
+                step={control.step}
+                value={values[control.uniform]}
+                onChange={(e) => handleChange(control.uniform, parseFloat(e.target.value))}
+                className={styles.uniformSlider}
+              />
+              {activeTooltip === control.uniform && control.description && (
+                <div className={`${styles.tooltip} ${styles.visible}`}>{control.description}</div>
+              )}
+            </div>
           </div>
         );
 

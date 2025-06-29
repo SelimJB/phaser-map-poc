@@ -34,7 +34,7 @@
 }
 
 .uniformControlGroup {
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .uniformControlHeader {
@@ -165,7 +165,7 @@
 .controlsContainer {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
   overflow-y: scroll;
   overflow-x: hidden;
   flex: 1;
@@ -175,12 +175,10 @@
   -ms-overflow-style: none;
 }
 
-/* Hide default scrollbar completely */
 .controlsContainer::-webkit-scrollbar {
   display: none;
 }
 
-/* Custom scroll indicator */
 .scrollIndicator {
   position: absolute;
   right: 5px;
@@ -217,7 +215,7 @@
   color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin: 16px 0 12px 0;
+  margin: 22px 0 2px 0;
 }
 
 .sectionTitle:first-child {
@@ -225,13 +223,13 @@
 }
 
 .toggleSection {
-  margin-bottom: 24px;
-  padding-bottom: 20px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .toggleControlGroup {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .toggleLabel {
@@ -286,7 +284,73 @@
 }
 
 .sliderSection {
-  margin-bottom: 24px;
-  padding-bottom: 20px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Ajout des styles pour les tooltips personnalisés */
+.sliderContainer {
+  position: relative;
+}
+
+.infoIcon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 10px;
+  line-height: 14px;
+  text-align: center;
+  cursor: help;
+  margin-left: 6px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.infoIcon:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: white;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.95);
+  color: white;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.4;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-5px);
+  margin-bottom: 8px;
+  max-width: 350px;
+  white-space: normal;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: rgba(0, 0, 0, 0.95);
+}
+
+.tooltip.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
 }

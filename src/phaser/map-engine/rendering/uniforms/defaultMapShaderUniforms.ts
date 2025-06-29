@@ -23,7 +23,7 @@ export const defaultMapUniforms = {
   uContourOpacity: 1,
   uOuterContourSize: 0.0005,
   uInnerContourSample: 16,
-  uGlowAndOuterContourSample: 32,
+  uGlowAndOuterContourSample: 24,
   uMouseIlluminationRadius: 0.2,
   uMouseIlluminationIntensity: 0.15,
   uEnableMouseIllumination: true,
