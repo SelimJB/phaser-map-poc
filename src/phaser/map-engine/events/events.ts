@@ -3,6 +3,7 @@ export const enum RenderMapEvent {
   PipelineChange = 'pipelineChange',
   ShaderDebugChange = 'shaderDebugChange',
   ResetUniforms = 'resetUniforms',
+  TriggerResetUniforms = 'TriggerReset', // TODO
   ShuffleColors = 'shuffleColors'
 }
 

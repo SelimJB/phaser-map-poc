@@ -114,32 +114,7 @@ export const UniformControls: React.FC = () => {
   };
 
   const handleDebugAction = (action: RenderMapEvent | DebugMapEvent) => {
-    if (action === RenderMapEvent.ResetUniforms) {
-      const defaultSliderValues = Object.fromEntries(
-        controls
-          .filter((c): c is SliderControl => c.type === ControlType.SLIDER)
-          .map((c) => [c.uniform, c.defaultValue])
-      );
-      const defaultToggleValues = Object.fromEntries(
-        controls
-          .filter((c): c is ToggleControl => c.type === ControlType.TOGGLE)
-          .map((c) => [c.uniform, c.defaultValue])
-      );
-
-      setValues(defaultSliderValues);
-      setToggleValues(defaultToggleValues);
-
-      controls.forEach((control) => {
-        if (control.type === ControlType.SLIDER || control.type === ControlType.TOGGLE) {
-          mapControlBridge.emit('uniformChange', {
-            uniform: control.uniform,
-            value: control.defaultValue
-          });
-        }
-      });
-    } else {
-      mapControlBridge.emit(action);
-    }
+    mapControlBridge.emit(action);
   };
 
   const renderControl = (control: Control, index: number) => {

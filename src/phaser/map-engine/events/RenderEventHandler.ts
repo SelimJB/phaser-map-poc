@@ -7,6 +7,10 @@ export class RenderEventHandler {
   constructor(private mapRenderer: MapRenderer) {}
 
   public initialize() {
+    mapControlBridge.addHandler(RenderMapEvent.TriggerResetUniforms, () => {
+      this.mapRenderer.updateUniforms(this.mapRenderer.defaultUniforms);
+    });
+
     mapControlBridge.addHandler(RenderMapEvent.UniformChange, (data: UniformChangeData) => {
       this.mapRenderer.updateUniforms({ [data.uniform]: data.value });
     });
@@ -23,5 +27,7 @@ export class RenderEventHandler {
     mapControlBridge.addHandler(DebugMapEvent.DisplayGrayscaleShader, () => {
       this.mapRenderer.updateUniforms({ uVisualizationMode: VisualizationModes.Gray });
     });
+
+    mapControlBridge.emit(RenderMapEvent.TriggerResetUniforms);
   }
 }

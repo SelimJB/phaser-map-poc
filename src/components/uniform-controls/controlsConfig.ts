@@ -34,7 +34,7 @@ export const controls: Control[] = [
       'Controls the overall intensity of shader effects. At 0, only the base map is visible (no effects). At 1, all shader effects are applied at full strength.',
     min: 0,
     max: 1,
-    step: 0.1,
+    step: 0.05,
     defaultValue: 0.81,
     order: 3
   },
@@ -70,7 +70,7 @@ export const controls: Control[] = [
       'Controls the intensity of the grayscale effect. At 0, the grayscale effect is completely off. At 1, the grayscale effect is fully applied.',
     min: 0,
     max: 1,
-    step: 0.1,
+    step: 0.05,
     defaultValue: 1,
     order: 3
   },
@@ -97,7 +97,7 @@ export const controls: Control[] = [
     description: 'Controls the opacity of the border map.',
     min: 0,
     max: 1,
-    step: 0.1,
+    step: 0.05,
     defaultValue: 1,
     order: 4
   },
@@ -211,6 +211,28 @@ export const controls: Control[] = [
   },
   {
     type: ControlType.TITLE,
+    name: 'Actions',
+    order: 6,
+    level: TitleLevel.H4
+  },
+  {
+    type: ControlType.BUTTON,
+    name: 'Reset All',
+    action: RenderMapEvent.TriggerResetUniforms,
+    icon: '🔄',
+    description: 'Reset all uniforms to default values',
+    order: 6
+  },
+  {
+    type: ControlType.BUTTON,
+    name: 'Shuffle Colors',
+    action: RenderMapEvent.ShuffleColors,
+    icon: '✨',
+    description: 'Shuffle province colors',
+    order: 6
+  },
+  {
+    type: ControlType.TITLE,
     name: 'Contours',
     order: 6,
     level: TitleLevel.H4
@@ -241,10 +263,10 @@ export const controls: Control[] = [
     uniform: 'uContourLuminosity',
     description:
       'Controls the luminosity of the contour effect. At 0, the contour effect is completely off. At 1, the contour effect is fully applied.',
-    min: 0,
-    max: 2,
+    min: -1,
+    max: 1,
     step: 0.05,
-    defaultValue: 1,
+    defaultValue: 0.05,
     order: 6
   },
   {
@@ -333,8 +355,8 @@ export const controls: Control[] = [
     uniform: 'uMouseIlluminationIntensity',
     min: 0,
     max: 1,
-    step: 0.1,
-    defaultValue: 0.07,
+    step: 0.05,
+    defaultValue: 0.12,
     order: 7
   },
 
@@ -387,27 +409,5 @@ export const controls: Control[] = [
     step: 1,
     defaultValue: 0,
     order: 20
-  },
-  {
-    type: ControlType.TITLE,
-    name: 'Actions',
-    order: 24,
-    level: TitleLevel.H4
-  },
-  {
-    type: ControlType.BUTTON,
-    name: 'Reset All',
-    action: RenderMapEvent.ResetUniforms,
-    icon: '🔄',
-    description: 'Reset all uniforms to default values',
-    order: 25
-  },
-  {
-    type: ControlType.BUTTON,
-    name: 'Shuffle Colors',
-    action: RenderMapEvent.ShuffleColors,
-    icon: '✨',
-    description: 'Shuffle province colors',
-    order: 26
   }
 ];
