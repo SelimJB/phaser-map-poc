@@ -5,7 +5,7 @@ import { MapEngine } from './map-engine';
 export default function initializePhaser(): void {
   const maps: Map<MapType, MapEngine> = new Map();
   let currentMap: MapEngine;
-  let currentMapType: MapType = MapType.SIMPLE;
+  let currentMapType: MapType = MapType.EUROPA;
 
   const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
@@ -28,7 +28,7 @@ export default function initializePhaser(): void {
     for (const map of Object.values(AVAILABLE_MAPS)) {
       maps.set(map.id, new MapEngine(this, map.config));
     }
-    currentMap = maps.get(MapType.SIMPLE)!;
+    currentMap = maps.get(currentMapType)!;
   }
 
   function create(this: Phaser.Scene) {

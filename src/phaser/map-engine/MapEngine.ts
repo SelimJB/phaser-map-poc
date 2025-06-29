@@ -98,9 +98,15 @@ export default class MapEngine {
   }
 
   private onPointerMove(data: MapInteractionData) {
-    if (data.quantization === 0) return;
-
     const { pxPosition: position, quantization } = data;
+
+    if (data.quantization === 0) {
+      const uniforms: MapUniforms = {
+        uMousePos: [position.x, position.y]
+      };
+      this.mapRenderer.updateUniforms(uniforms);
+      return;
+    }
 
     const provinceColor = this.textureGenerator.getProvinceColor(quantization);
 

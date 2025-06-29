@@ -35,15 +35,12 @@ export default class MapShaderPipeline extends Phaser.Renderer.WebGL.Pipelines.M
     this.mainSample = uniforms.uMapTextureArray;
     this.set2fv('uMapResolution', uniforms.uMapResolution);
     this.set1f('uQuantizationLevelAmount', uniforms.uQuantizationLevelAmount);
-    this.set1i('uVisualizationMethod', uniforms.uVisualizationMethod);
     this.set1f('uBlendFactor', uniforms.uBlendFactor);
     this.set1f('uBlendFactorSecondary', uniforms.uBlendFactorSecondary);
     this.set1f('uContrast', uniforms.uContrast);
     this.set1f('uMiddleGray', uniforms.uMiddleGray);
     this.set1f('uGrayscaleBlendFactor', uniforms.uGrayscaleBlendFactor);
-    this.set1i('uUseAverageGrayWeights', uniforms.uUseAverageGrayWeights ? 1 : 0);
     this.set1i('uEnableHover', uniforms.uEnableHover ? 1 : 0);
-    this.set1i('uHoverVisualizationMethod', uniforms.uHoverVisualizationMethod);
     this.set1f('uHoverBlendFactor', uniforms.uHoverBlendFactor);
     this.set1f('uHoverGrayscaleBlendFactor', uniforms.uHoverGrayscaleBlendFactor);
     this.set1f('uGlowRadius', uniforms.uGlowRadius);
@@ -66,7 +63,6 @@ export default class MapShaderPipeline extends Phaser.Renderer.WebGL.Pipelines.M
     this.set1i('uInnerContourSample', uniforms.uInnerContourSample);
     this.set1i('uGlowAndOuterContourSample', uniforms.uGlowAndOuterContourSample);
     this.set1i('uUseColoredBorders', uniforms.uUseColoredBorders ? 1 : 0);
-    this.set1i('uDisplayBlankMap', uniforms.uDisplayBlankMap ? 1 : 0);
     this.set1i('uEnablePulsations', uniforms.uEnablePulsations ? 1 : 0);
     this.set1f('uPulsationPeriod', uniforms.uPulsationPeriod);
     this.set1f('uPulsationIntensity', uniforms.uPulsationIntensity);
@@ -76,9 +72,7 @@ export default class MapShaderPipeline extends Phaser.Renderer.WebGL.Pipelines.M
     this.set1i('uDisplayFlag', 0);
     this.set1i('uEnablePatterns', uniforms.uEnablePatterns ? 1 : 0);
     this.set1f('uPatternSize', uniforms.uPatternSize);
-    this.set1i('uUseJunctionAntialiasing', uniforms.uUseJunctionAntialiasing ? 1 : 0);
-    this.set1f('uJunctionAntialiasingSize', uniforms.uJunctionAntialiasingSize);
-    this.set1f('uVisualitionMode', uniforms.uVisualitionMode);
+    this.set1f('uVisualizationMode', uniforms.uVisualizationMode);
   }
 
   private refreshTextureBindings() {
@@ -180,15 +174,6 @@ export default class MapShaderPipeline extends Phaser.Renderer.WebGL.Pipelines.M
       this.uniform.uMouseIlluminationIntensity = uniform.uMouseIlluminationIntensity;
       this.set1f('uMouseIlluminationIntensity', uniform.uMouseIlluminationIntensity);
     }
-    //
-    if (uniform.uHoverVisualizationMethod !== undefined) {
-      this.uniform.uHoverVisualizationMethod = uniform.uHoverVisualizationMethod;
-      this.set1i('uHoverVisualizationMethod', uniform.uHoverVisualizationMethod);
-    }
-    if (uniform.uVisualizationMethod !== undefined) {
-      this.uniform.uVisualizationMethod = uniform.uVisualizationMethod;
-      this.set1i('uVisualizationMethod', uniform.uVisualizationMethod);
-    }
     if (uniform.uContourIntensity !== undefined) {
       this.uniform.uContourIntensity = uniform.uContourIntensity;
       this.set1f('uContourIntensity', uniform.uContourIntensity);
@@ -269,10 +254,6 @@ export default class MapShaderPipeline extends Phaser.Renderer.WebGL.Pipelines.M
       this.uniform.uGlowColor = uniform.uGlowColor;
       this.set3fv('uGlowColor', uniform.uGlowColor);
     }
-    if (uniform.uDisplayBlankMap !== undefined) {
-      this.uniform.uDisplayBlankMap = uniform.uDisplayBlankMap;
-      this.set1i('uDisplayBlankMap', uniform.uDisplayBlankMap ? 1 : 0);
-    }
     //
     if (uniform.uEnablePulsations !== undefined) {
       this.uniform.uEnablePulsations = uniform.uEnablePulsations;
@@ -298,13 +279,9 @@ export default class MapShaderPipeline extends Phaser.Renderer.WebGL.Pipelines.M
       this.uniform.uPatternSize = uniform.uPatternSize;
       this.set1f('uPatternSize', uniform.uPatternSize);
     }
-    if (uniform.uJunctionAntialiasingSize !== undefined) {
-      this.uniform.uJunctionAntialiasingSize = uniform.uJunctionAntialiasingSize;
-      this.set1f('uJunctionAntialiasingSize', uniform.uJunctionAntialiasingSize);
-    }
-    if (uniform.uVisualitionMode !== undefined) {
-      this.uniform.uVisualitionMode = uniform.uVisualitionMode;
-      this.set1f('uVisualitionMode', uniform.uVisualitionMode);
+    if (uniform.uVisualizationMode !== undefined) {
+      this.uniform.uVisualizationMode = uniform.uVisualizationMode;
+      this.set1f('uVisualizationMode', uniform.uVisualizationMode);
     }
   }
 }

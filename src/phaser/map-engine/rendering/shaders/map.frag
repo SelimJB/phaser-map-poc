@@ -73,7 +73,7 @@ uniform float uOuterContourSize;
 uniform int uInnerContourSample;
 uniform int uGlowAndOuterContourSample;
 //// Visualization mode
-uniform float uVisualitionMode;
+uniform float uVisualizationMode;
 
 const vec3 grayWeights=vec3(.9,.075,.025);
 
@@ -158,35 +158,35 @@ void main(){
     
     vec4 glow=vec4(0.);
     
-    if(uVisualitionMode>.5){
-        if(uVisualitionMode>6.5){
+    if(uVisualizationMode>.5){
+        if(uVisualizationMode>6.5){
             float gray=dot(mapTexture.rgb,grayWeights);
             float contrasted=clamp(uMiddleGray+gray*uContrast,0.,1.);
             vec4 texInterpolated=vec4(contrasted,contrasted,contrasted,1);
             gl_FragColor=texInterpolated;
             return;
         }
-        if(uVisualitionMode>5.5){
+        if(uVisualizationMode>5.5){
             gl_FragColor=texture2D(uMainSampler[0],uv);
             return;
         }
-        if(uVisualitionMode>4.5){
+        if(uVisualizationMode>4.5){
             gl_FragColor=texture2D(uMainSampler[1],uv);
             return;
         }
-        if(uVisualitionMode>3.5){
+        if(uVisualizationMode>3.5){
             gl_FragColor=texture2D(uMainSampler[2],uv);
             return;
         }
-        if(uVisualitionMode>2.5){
+        if(uVisualizationMode>2.5){
             gl_FragColor=texture2D(uMainSampler[3],uv);
             return;
         }
-        if(uVisualitionMode>1.5){
+        if(uVisualizationMode>1.5){
             gl_FragColor=texture2D(uMainSampler[4],uv);
             return;
         }
-        if(uVisualitionMode>.5){
+        if(uVisualizationMode>.5){
             gl_FragColor=texture2D(uMainSampler[5],uv);
             return;
         }

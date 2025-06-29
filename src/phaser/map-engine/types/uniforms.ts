@@ -39,18 +39,14 @@ export type MapUniformsBase = {
   uPulsationIntensity: number;
   uSelectedProvinceQuant?: number;
   uClickTime?: number;
-  uDisplayBlankMap: boolean;
-  uVisualizationMethod: number;
   uBlendFactor: number;
   uBlendFactorSecondary: number;
   uContrast: number;
   uMiddleGray: number;
   uGrayscaleBlendFactor: number;
-  uUseAverageGrayWeights: boolean;
   uEnablePatterns: boolean;
   uPatternSize: number;
   uEnableHover: boolean;
-  uHoverVisualizationMethod: number;
   uHoverBlendFactor: number;
   uHoverGrayscaleBlendFactor: number;
   uUseColoredBorders: boolean;
@@ -74,7 +70,5 @@ export type MapUniformsBase = {
   uOuterContourSize: number;
   uInnerContourSample: number;
   uGlowAndOuterContourSample: number;
-  uUseJunctionAntialiasing: boolean;
-  uJunctionAntialiasingSize: number;
-  uVisualitionMode: number;
+  uVisualizationMode: number;
 };

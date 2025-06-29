@@ -4,7 +4,6 @@ export const defaultMapUniforms = {
   uHoveredProvinceColor: [0, 0, 0] as Color,
   uEnableHover: true,
   uVisualizationMethod: 3,
-  uDisplayBlankMap: false,
   uBlendFactor: 0.81,
   uContrast: 3.2,
   uMiddleGray: 0.65,
@@ -13,7 +12,6 @@ export const defaultMapUniforms = {
   uHoverBlendFactor: 0.9,
   uBlendFactorSecondary: 1,
   uHoverGrayscaleBlendFactor: 0.83,
-  uUseAverageGrayWeights: false,
   uGlowRadius: 0.011,
   uGlowPulsationRadius: 0.005,
   uGlowPulsationPeriod: 5,
@@ -35,15 +33,12 @@ export const defaultMapUniforms = {
   uContourOpacity: 1,
   uInnerContourSample: 16,
   uGlowAndOuterContourSample: 32,
-  uUseUniformColorFetching: true,
   uEnablePulsations: true,
   uPulsationPeriod: 5,
   uPulsationIntensity: 0.05,
-  uUseJunctionAntialiasing: true,
-  uJunctionAntialiasingSize: 0.04,
-  uVisualitionMode: 0,
   uEnablePatterns: false,
-  uPatternSize: 90
+  uPatternSize: 90,
+  uVisualizationMode: 0
 };
 
 export const defaultSimpleMapUniforms: MapUniforms = {

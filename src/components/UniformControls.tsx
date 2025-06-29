@@ -23,11 +23,11 @@ interface DebugButton {
 const VisualizationModes = {
   0: 'Shader',
   1: 'Bitmap',
-  2: 'Province Data',
-  3: 'Province Colors',
-  4: 'Main Map',
-  5: 'Borders',
-  6: 'Combined',
+  2: 'Plain',
+  3: 'Colors',
+  4: 'Borders',
+  5: 'Bitmap FX',
+  6: 'Debug',
   7: 'Gray'
 } as const;
 
@@ -49,6 +49,22 @@ let controls: UniformControl[] = [
     defaultValue: 0.65
   },
   {
+    name: 'Grayscale blend factor',
+    uniform: 'uGrayscaleBlendFactor',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    defaultValue: 1
+  },
+  {
+    name: 'Blend factor',
+    uniform: 'uBlendFactor',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    defaultValue: 0.81
+  },
+  {
     name: 'Border map opacity',
     uniform: 'uBorderMapOpacity',
     min: 0,
@@ -59,6 +75,14 @@ let controls: UniformControl[] = [
   {
     name: 'Hover blend factor',
     uniform: 'uHoverBlendFactor',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    defaultValue: 1
+  },
+  {
+    name: 'Hover grayscale blend factor',
+    uniform: 'uHoverGrayscaleBlendFactor',
     min: 0,
     max: 1,
     step: 0.1,
@@ -89,12 +113,108 @@ let controls: UniformControl[] = [
     defaultValue: 0.02
   },
   {
+    name: 'Glow pulsation period',
+    uniform: 'uGlowPulsationPeriod',
+    min: 0,
+    max: 10,
+    step: 1,
+    defaultValue: 5
+  },
+  {
     name: 'Visualization mode',
-    uniform: 'uVisualitionMode',
+    uniform: 'uVisualizationMode',
     min: 0,
     max: 7,
     step: 1,
     defaultValue: 0
+  },
+  {
+    name: 'Contour intensity',
+    uniform: 'uContourIntensity',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    defaultValue: 1
+  },
+  {
+    name: 'Contour luminosity',
+    uniform: 'uContourLuminosity',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    defaultValue: 1
+  },
+  {
+    name: 'Inner contour size',
+    uniform: 'uInnerContourSize',
+    min: 0,
+    max: 0.05,
+    step: 0.01,
+    defaultValue: 0.0045
+  },
+  {
+    name: 'Outer contour size',
+    uniform: 'uOuterContourSize',
+    min: 0,
+    max: 0.05,
+    step: 0.01,
+    defaultValue: 0.002
+  },
+  {
+    name: 'Mouse illumination radius',
+    uniform: 'uMouseIlluminationRadius',
+    min: 0,
+    max: 0.2,
+    step: 0.01,
+    defaultValue: 0.2
+  },
+  {
+    name: 'Mouse illumination intensity',
+    uniform: 'uMouseIlluminationIntensity',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    defaultValue: 0.07
+  },
+  {
+    name: 'Contour opacity',
+    uniform: 'uContourOpacity',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    defaultValue: 1
+  },
+  {
+    name: 'Inner contour sample',
+    uniform: 'uInnerContourSample',
+    min: 0,
+    max: 16,
+    step: 1,
+    defaultValue: 16
+  },
+  {
+    name: 'Outer contour sample',
+    uniform: 'uOuterContourSample',
+    min: 0,
+    max: 32,
+    step: 1,
+    defaultValue: 32
+  },
+  {
+    name: 'Pulsation period',
+    uniform: 'uPulsationPeriod',
+    min: 0,
+    max: 10,
+    step: 1,
+    defaultValue: 5
+  },
+  {
+    name: 'Pulsation intensity',
+    uniform: 'uPulsationIntensity',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    defaultValue: 0.05
   }
 ];
 
@@ -176,7 +296,7 @@ export const UniformControls: React.FC = () => {
             <div className={styles.uniformControlHeader}>
               <span>
                 {control.name}
-                {control.uniform === 'uVisualitionMode' && (
+                {control.uniform === 'uVisualizationMode' && (
                   <span className={styles.visualizationMode}>
                     :{' '}
                     {VisualizationModes[values[control.uniform] as keyof typeof VisualizationModes]}

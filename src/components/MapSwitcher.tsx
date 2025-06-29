@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import styles from '../style/MapSwitcher.module.css';
 
 const MapSwitcher: React.FC = () => {
-  const [currentMap, setCurrentMap] = useState<MapType>(MapType.SIMPLE);
+  const [currentMap, setCurrentMap] = useState<MapType>(MapType.EUROPA);
 
   const handleSwitchToSimple = () => {
     if (window.switchMap) {
